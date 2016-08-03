@@ -2,7 +2,28 @@
 
 #### INTRODUCTION:
 
-This project contains the source code and annotations for analyzing object detectors and pose estimators on the PASCAL 3D+ dataset.  
+This project contains the source code and annotations for analyzing object detectors and pose estimators on the PASCAL 3D+ dataset.
+
+This is a repository with an implementation of the diasnotic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper.
+
+#License
+
+The license information of this project is described in the file "LICENSE".
+
+#CITING
+
+If you make use of this software, please cite the following reference in any publications:  
+
+@inproceedings{Redondo-Cabrera2016,
+    Title                    = {Pose Estimation Errors, the Ultimate Diagnosis},
+    Author                   = {Redondo-Cabrera, C. Lopez-Sastre, R.~J., Xiang, Y., Tuytelaars, T. and Savarese, S.},
+    Booktitle                = {ECCV},
+    Year                     = {2016}
+}
+
+#REQUIREMENTS
+
+The diasnotic tool is developed and tested under Ubuntu 14.04. Matlab is required.
 
 #### HOW TO RUN:
 
