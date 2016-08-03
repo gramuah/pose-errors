@@ -262,7 +262,7 @@ pr('\\begin{figure}[h]\n');
 pr('\\centering\n');
 pr('\\subfloat[]{\n');
 pr('\\label{fig1a}\n');
-pr('\\includegraphics[width=0.45\\textwidth,trim = 25mm 65mm 25mm 65mm, clip]{../plot_3.pdf} \n');
+pr('\\includegraphics[width=0.45\\textwidth,trim = 25mm 65mm 20mm 65mm, clip]{../plot_3.pdf} \n');
 pr('}\n');
 pr('\\subfloat[]{\n');
 pr('\\label{fig1b}\n');
@@ -313,7 +313,7 @@ if strcmp(detector(length(detector)-1:length(detector)), 'gt')
 else
     pr('\\begin{figure}[h]\n');
     pr('\\centering\n');
-    pr('\\includegraphics[width=0.85\\textwidth,trim = 15mm 65mm 25mm 65mm, clip]{../plot_1.pdf}\n');
+    pr('\\includegraphics[width=0.85\\textwidth,trim = 10mm 65mm 25mm 65mm, clip]{../plot_1.pdf}\n');
     pr('\\caption{\\textbf{Summary of Sensitivity and Impact of Object Characteristics.} We show the %s performance of the highest performing and lowest performing subsets within each characteristic (occlusion/truncation (occ-trn), difficult objects (diff), bounding box area or object size (size), aspect ratio (asp), visible sides (side) and part visibility (part)). Overall accuracy is indicated by the black dashed line. The difference between max and min indicates sensitivity; the difference between max and overall indicates the impact.\n', metric); 
     pr('}\n');
     pr('\\label{fig4}\n');
@@ -357,10 +357,10 @@ for obj=1:length(objects)
         pr('\\subfloat[%s]{\n', name);
         pr('\\label{fig6%c}\n', char(96 + obj));
         if mod(obj,3) ~= 0
-            pr('\\includegraphics[width=0.3\\textwidth,trim = 25mm 65mm 25mm 65mm, clip]{../%s/analysisI/plot_2.pdf} \n', name); 
+            pr('\\includegraphics[width=0.3\\textwidth,trim = 25mm 65mm 20mm 65mm, clip]{../%s/analysisI/plot_2.pdf} \n', name); 
             pr('}\n');
         else
-            pr('\\includegraphics[width=0.3\\textwidth,trim = 25mm 65mm 25mm 65mm, clip]{../%s/analysisI/plot_2.pdf} \n', name); 
+            pr('\\includegraphics[width=0.3\\textwidth,trim = 25mm 65mm 20mm 65mm, clip]{../%s/analysisI/plot_2.pdf} \n', name); 
             pr('}\\\\n');
         end
         

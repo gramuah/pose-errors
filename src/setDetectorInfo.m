@@ -4,7 +4,7 @@ function [detpath, resultdir, detname] = setDetectorInfo(detector)
 % sets path etc for given detector
 
   switch detector
-    case 'rand'
+    case 'rand-gt'
       detpath = '../detections/rand/RAND_PASCAL3D_%s_det.txt';
       resultdir = '../results/rand';
       detname = 'rand';

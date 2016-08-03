@@ -10,8 +10,8 @@ DO_OVERLAP_CRITERIA_ANALYSIS = 1;
 SAVE_SUMMARY = 1;
 
 % specify which pose estimators and detectors to evaluate
-full_set = {'rand', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
-detectors = {'rand', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'}; % detectors to analyze 
+full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
+detectors = {'rand-gt', 'bhf', 'vdpm', 'vpskps', 'vpskps-gt'}; % detectors to analyze 
 
 dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
