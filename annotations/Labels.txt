@@ -1,0 +1,160 @@
+======================= PARTS ======================
+aeroplane :
+	p1	left elevator
+	p2	left wing
+	p3	noselanding
+	p4	right elevator
+    p5  right wing
+    p6  rudder lower
+    p7  rudder upper
+    p8  tail
+
+bicycle :
+	p1	head center
+	p2	left back wheel
+	p3	left front wheel
+	p4	left handle
+    p5  left pedal center
+	p6	right back wheel
+	p7	right front wheel
+	p8	right handle
+    p9  right pedal center
+    p10 seat back
+    p11 seat front
+
+boat :
+	p1	head
+	p2	head down
+	p3	head left
+	p4	head right
+	p5	tail left
+	p6	tail right
+    p7  tail
+
+bus :
+	p1	body back left lower
+	p2	body back left upper
+	p3	body back right lower
+	p4	body back right upper
+	p5	body front left upper
+	p6	body front right upper
+    p7  body front left lower
+    p8  body front right lower
+    p9  left back wheel
+    p10 left front wheel
+    p11 right back wheel
+    p12 right front wheel
+
+car :
+	p1	left front wheel
+	p2	left back wheel
+	p3	right front wheel
+	p4	right back wheel
+	p5	upper left windshield
+    p6  upper right windshield
+    p7  upper left rearwindow
+    p8  upper right rearwindow
+    p9  left front light
+    p10 right front light
+    p11 left back trunk
+    p12 right back trunk
+
+chair :
+	p1	back upper left
+	p2	back upper right
+	p3	seat upper left
+	p4	seat upper right
+    p5  seat lower left
+    p6  seat lower right
+    p7  leg upper left
+    p8  leg upper right
+    p9  leg lower left
+    p10 leg lower right
+
+diningtable :
+	p1	leg upper left
+	p2	leg upper right
+    p3  leg lower left
+    p4  leg lower right
+    p5  top upper left
+    p6  top upper right
+    p7  top lower left
+    p8  top lower right
+    p9  top up
+    p10 top down
+    p11 top left
+    p12 top right
+
+motorbike :
+    p1  back seat
+    p2  front seat
+    p3  head center
+    p4  headlight center
+    p5  left back wheel
+    p6  left front wheel
+    p7  left handle center
+    p8  right back wheel
+    p9  right front wheel
+    p10 right handle center
+
+sofa :
+    p1  front bottom left
+    p2  front bottom right
+    p3  seat bottom left
+    p4  seat bottom right
+    p5  left bottom back
+    p6  right bottom back
+    p7  top left corner
+    p8  top right corner
+    p9  seat top left
+    p10 seat top right
+
+train :
+    p1  head left bottom
+    p2  head left top
+    p3  head right bottom
+    p4  head right top
+    p5  head top
+    p6  mid1 left bottom
+    p7  mid1 left top
+    p8  mid1 right bottom
+    p9  mid1 right top
+    p10 mid2 left bottom
+    p11 mid2 left top
+    p12 mid2 right bottom
+    p13 mid2 right top
+    p14 tail left bottom
+    p15 tail left top
+    p16 tail right bottom
+    p17 tail right top
+
+tvmonitor :
+    p1  front bottom left
+    p2  front bottom right
+    p3  front top left
+    p4  front top right
+    p5  back bottom left
+    p6  back bottom right
+    p7  back top left
+    p8  back top right
+
+======================= VIEWS ======================
+v1 	bottom
+v2	front
+v3	rear
+v4	side
+v5	top
+
+===================== OBJECT SIZE ==================
+extra small: XS =>  pixel area < 10%  
+small: S =>  pixel area approx. 20%
+medium: M =>  pixel area approx. 40%
+large: L =>  pixel area approx. 70%
+extra large: XL =>  pixel area > 80%
+
+================ OBJECT ASPECT RATIO ===============
+extra width: XW => height/width < 10%
+width: W => height/width approx. 20%
+medium: M  => height/width approx. 40%
+tall: T  => height/width approx. 70%
+extra tall => height/width > 80%

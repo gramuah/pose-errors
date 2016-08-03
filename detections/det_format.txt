@@ -1,0 +1,9 @@
+For each object category, a .txt file is needed to realize the pose analysis.
+These files contain for each row the detections and estimations obtained by the
+detectors. The format for each detections is:
+
+image_name (without extension, \ie '.jpg') score x1 y1 x2 y2 azimuth zenith
+
+example:
+
+    2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43 

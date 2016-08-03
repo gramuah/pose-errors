@@ -1,0 +1,52 @@
+\documentclass[10pt,onecolumn, a4paper]{article}
+\usepackage[plainpages=false,colorlinks]{hyperref}
+\usepackage{graphicx}
+\usepackage{subfloat}
+\usepackage{subfig}
+\usepackage{color}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[width=122mm,left=12mm,paperwidth=146mm,height=193mm,top=12mm,paperheight=217mm]{geometry}
+
+\begin{document}
+\thispagestyle{empty}
+
+\begin{center}
+\vspace{4cm}
+\textsf{\textbf{\Huge}}
+\end{center}{\Huge \par}
+
+\begin{center}
+\vspace{4cm}
+\textsf{\textbf{\Huge Pose Estimation Errors, the Ultimate Diagnosis}}
+\end{center}{\Huge \par}
+
+\vspace{3cm}
+
+\begin{center}\textsf{\Huge Report}\end{center}{\Huge \par}
+
+\vspace{6cm}
+\begin{flushleft}
+\textsf{\textbf{This report is associated with the work}: Pose Estimation Errors, the
+Ultimate Diagnosis. C. Redondo-Cabrera, R. J. Lopez-Sastre, Y. Xiang , T.
+Tuytelaars, S. Savarese. ECCV, 2016.}{\par}
+\end{flushleft}
+\newpage
+
+\tableofcontents{}\cleardoublepage
+
+\title{Pose Estimation Errors, the Ultimate Diagnosis: Report}
+
+\maketitle
+\thispagestyle{empty}
+
+\input{header.tex} 
+\newpage
+\section{Overall: Main Characteristics}
+\input{results.tex}
+
+\clearpage
+\section{Results per Object Class}
+\input{classes}
+
+
+\end{document}
