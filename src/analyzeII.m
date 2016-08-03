@@ -66,10 +66,8 @@ ii = find(result.pose.labels_pose == 1 | result.pose.labels_pose == 3 | ...
 hh=1;
 result.pose.isopp = [];
 for jj = 1: length(ii)
-    if det.gtnum(ii(jj)) ~= 0
-        result.pose.isopp(hh) = ii(jj);
-        hh = hh+1;
-    end
+    result.pose.isopp(hh) = ii(jj);
+    hh = hh+1;
 end
 if ~isempty(result.pose.isopp)
     det2.bbox = det.bbox(result.pose.isopp,:);
@@ -87,22 +85,14 @@ if ~isempty(result.pose.isopp)
     det2.label_occ = det.label_occ(result.pose.isopp,:);
     det2.label_trunc = det.label_trunc(result.pose.isopp,:);
     det2.isduplicate = det.isduplicate(result.pose.isopp,:);
-    gt2=[];
-    for j=1:length(result.pose.isopp)
-        gt2.isdiff(j) = gt.isdiff(det.gtnum(result.pose.isopp(j)), :);
-    end
-    if ~isempty(gt2)
-        ah=0;
-        ai=find(result.pose.labels_pose == 2);
-        for j = 1: length(ai);
-            if det.isdiff(ai(j)) == 0
-                ah = ah+1;
-            end
+    ah=0;
+    ai=find(result.pose.labels_pose == 2);
+    for j = 1: length(ai);
+        if det.isdiff(ai(j)) == 0
+            ah = ah+1;
         end
-        npos = sum(~[gt.isdiff])-ah;
-    else
-        npos = 0;
     end
+    npos = sum(~[gt.isdiff])-ah;
     dummy = [];
     [result.pose.ignoreopp, dummy] = averagePoseDetectionPrecision(det2, gt, npos);
 else
@@ -114,10 +104,8 @@ ii = [];
 ii = find(result.pose.labels_pose == 2);
 hh=1;
 for jj = 1: length(ii)
-    if det.gtnum(ii(jj)) ~= 0
-        result.pose.isopp2(hh) = ii(jj);
-        hh = hh +1;
-    end
+    result.pose.isopp2(hh) = ii(jj);
+    hh = hh +1;
 end
 det3 = det;
 if hh > 1
@@ -135,10 +123,8 @@ ii = find(result.pose.labels_pose == 1 | result.pose.labels_pose == 2 | ...
     result.pose.labels_pose == 4 | result.pose.labels_pose == 0);
 hh=1;
 for jj= 1:length(ii)
-     if det.gtnum(ii(jj)) ~= 0 
-        result.pose.isnearby(hh) = ii(jj);
-        hh= hh+1;
-     end
+    result.pose.isnearby(hh) = ii(jj);
+    hh= hh+1;
 end
 det2 = [];
 if hh > 1
@@ -157,22 +143,14 @@ if hh > 1
     det2.label_occ = det.label_occ(result.pose.isnearby,:);
     det2.label_trunc = det.label_trunc(result.pose.isnearby,:);
     det2.isduplicate = det.isduplicate(result.pose.isnearby,:);
-    gt2 = [];
-    for j=1:length(det2.gtnum)
-        gt2.isdiff(j) = gt.isdiff(det2.gtnum(j), :);
+    ah=0;
+    ai=find(result.pose.labels_pose == 3);
+    for j = 1: length(ai);
+         if det.isdiff(ai(j)) == 0
+             ah = ah+1;
+         end
     end
-    if ~isempty(gt2)
-        ah=0;
-        ai=find(result.pose.labels_pose == 3);
-        for j = 1: length(ai);
-            if det.isdiff(ai(j)) == 0
-                ah = ah+1;
-            end
-        end
-        npos = sum(~[gt.isdiff])-ah;%sum(~[gt2.isdiff]);
-    else
-        npos = 0;
-    end
+    npos = sum(~[gt.isdiff])-ah;%sum(~[gt2.isdiff]);
     dummy = [];
     [result.pose.ignorenearby, dummy] = averagePoseDetectionPrecision(det2, gt, npos);
 else
@@ -191,10 +169,8 @@ ii = [];
 ii = find(result.pose.labels_pose == 3);
 hh=1;
 for jj= 1:length(ii)
-     if det.gtnum(ii(jj)) ~= 0 
-        result.pose.isnearby2(hh) = ii(jj);
-        hh= hh+1;
-     end
+    result.pose.isnearby2(hh) = ii(jj);
+    hh= hh+1;
 end
 
 det3 = det;
@@ -214,10 +190,8 @@ ii = find(result.pose.labels_pose == 1 | result.pose.labels_pose == 2 | ...
     result.pose.labels_pose == 3 | result.pose.labels_pose == 0);
 hh=1;
 for jj= 1:length(ii)
-     if det.gtnum(ii(jj)) ~= 0 
-        result.pose.isother(hh) = ii(jj);
-        hh= hh+1;
-     end
+    result.pose.isother(hh) = ii(jj);
+    hh= hh+1; 
 end
 det2 = [];
 if hh > 1
@@ -237,22 +211,15 @@ if hh > 1
     det2.label_trunc = det.label_trunc(result.pose.isother,:);
     det2.isduplicate = det.isduplicate(result.pose.isother,:);
 
-    gt2 = [];
-    for j=1:length(det2.gtnum)
-        gt2.isdiff(j) = gt.isdiff(det2.gtnum(j), :);
+    ah=0;
+    ai=find(result.pose.labels_pose == 4);
+    for j = 1: length(ai);
+         if det.isdiff(ai(j)) == 0
+             ah = ah+1;
+         end
     end
-    if ~isempty(gt2)
-        ah=0;
-        ai=find(result.pose.labels_pose == 4);
-        for j = 1: length(ai);
-            if det.isdiff(ai(j)) == 0
-                ah = ah+1;
-            end
-        end
-        npos = sum(~[gt.isdiff])-ah;
-    else
-        npos = 0;
-    end
+    npos = sum(~[gt.isdiff])-ah;
+
     dummy=[];
     [result.pose.ignoreother, dummy] = averagePoseDetectionPrecision(det2, gt, npos);
 else
@@ -264,10 +231,9 @@ ii = [];
 ii = find(result.pose.labels_pose == 4);
 hh=1;
 for jj= 1:length(ii)
-     if det.gtnum(ii(jj)) ~= 0 
-        result.pose.isother2(hh) = ii(jj);
-        hh= hh+1;
-     end
+     result.pose.isother2(hh) = ii(jj);
+     hh= hh+1;
+     
 end
 
 det3 = det;
@@ -283,39 +249,32 @@ dummy = [];
 
 % Only correct estimation: remove estimations that have label 2,3 and 4
 ii = [];
+det2 = [];
 ii = find(result.pose.labels_pose == 1);
 hh=1;
 for jj= 1:length(ii)
-     if det.gtnum(ii(jj)) ~= 0 &&  det.isdiff(ii(jj)) == 0
-        result.pose.isopp(hh) = ii(jj);
+     if det.isdiff(ii(jj)) == 0 
+        result.pose.ignall(hh) = ii(jj);
         hh= hh+1;
      end
 end
  
-det2.bbox = det.bbox(result.pose.isopp,:);
-det2.conf = det.conf(result.pose.isopp,:);
-det2.rnum = det.rnum(result.pose.isopp,:);
-det2.view = det.view(result.pose.isopp,:);
+det2.bbox = det.bbox(result.pose.ignall,:);
+det2.conf = det.conf(result.pose.ignall,:);
+det2.rnum = det.rnum(result.pose.ignall,:);
+det2.view = det.view(result.pose.ignall,:);
 det2.nimages = det.nimages;
 det2.N = det.N;
-det2.gtnum = det.gtnum(result.pose.isopp,:);
-det2.ov = det.ov(result.pose.isopp,:);
-det2.ov_obj = det.ov_obj(result.pose.isopp,:);
-det2.ov_gt = det.ov_gt(result.pose.isopp,:);
-det2.isdiff = det.isdiff(result.pose.isopp,:);
-det2.label = det.label(result.pose.isopp,:);
-det2.label_occ = det.label_occ(result.pose.isopp,:);
-det2.label_trunc = det.label_trunc(result.pose.isopp,:);
-det2.isduplicate = det.isduplicate(result.pose.isopp,:);
-gt2 = [];
-for j=1:length(det2.gtnum)
-    gt2.isdiff(j) = gt.isdiff(det2.gtnum(j), :);
-end
-if ~isempty(gt2)
-    npos = sum(~[gt2.isdiff]);
-    
-else
-    npos = 0;
-end
+det2.gtnum = det.gtnum(result.pose.ignall,:);
+det2.ov = det.ov(result.pose.ignall,:);
+det2.ov_obj = det.ov_obj(result.pose.ignall,:);
+det2.ov_gt = det.ov_gt(result.pose.ignall,:);
+det2.isdiff = det.isdiff(result.pose.ignall,:);
+det2.label = det.label(result.pose.ignall,:);
+det2.label_occ = det.label_occ(result.pose.ignall,:);
+det2.label_trunc = det.label_trunc(result.pose.ignall,:);
+det2.isduplicate = det.isduplicate(result.pose.ignall,:);
+
+npos = length(result.pose.ignall);
 dummy = [];
 [result.pose.ignoreall, dummy] = averagePoseDetectionPrecision(det2, gt, npos);
