@@ -17,8 +17,8 @@ dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
 
  % objects to analyze (could be a subset)
-objnames_selected  = {'aeroplane', 'bicycle'}%{'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
-    %'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'};
+objnames_selected  = {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
+    'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'};
 
 tp_display_localization = 'strong'; % set to 'weak' to do analysis with a high localization error
 flag_diningtable = 0;
