@@ -27,7 +27,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
 ## HOW TO RUN:
 
-   + *CASE I:* PASCAL 3D+ dataset and VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators.
+   + **CASE I:** PASCAL 3D+ dataset and VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators.
 
        1) Download [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html)
 
@@ -37,7 +37,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
    
        4) Run poseEstimationAnalysisScript.m in Matlab
 
-   + *CASE II:* PASCAL 3D+ dataset and your own pose estimators
+   + **CASE II:** PASCAL 3D+ dataset and your own pose estimators
 
        1) Create a subdirectory with the detector name within detections. 
          
@@ -54,7 +54,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
        4) Perform [2-4] steps of CASE I
 	
-   + *CASE III:* Include a new dataset and your own pose estimators
+   + **CASE III:** Include a new dataset and your own pose estimators
 
        1) Add the new dataset in the annotations folder
 
