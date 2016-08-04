@@ -29,17 +29,17 @@ minval = minval/length(rtotal);
 f=1;
 fs = 18;
 if strcmp(detector(length(detector)-1:length(detector)), 'gt')
-     fnames = {'side', 'part'};
-     xticklab = {'occ-trn', 'size', 'asp', 'side', 'part'};
+    
+    xticklab = {'occ-trn', 'size', 'asp', 'side', 'part'};
 else
-    fnames = {'side', 'part'};
+    
     xticklab = {'occ-trn', 'diff', 'size', 'asp', 'side', 'part'};
 end
 
-af=1;
+
 valid = true(size(xticklab));
 
-maxval = maxval(:, valid); minval = minval(:, valid); 
+maxval = maxval(:, valid); minval = minval(:, valid);
 fnames = xticklab(valid); xticklab = xticklab(valid);
 
 maxval = mean(maxval, 1);
@@ -50,26 +50,26 @@ figure(f), hold off;
 plot([1 numel(fnames)], [avgval avgval], 'k--', 'linewidth', 2);
 hold on;
 errorbar(1:numel(fnames), avgval*ones(1, numel(fnames)), avgval-minval, ...
-    maxval-avgval, 'r+', 'linewidth', 2);    
-for x = 1:numel(fnames) 
+    maxval-avgval, 'r+', 'linewidth', 2);
+for x = 1:numel(fnames)
     if (metric_type == 1) || (metric_type == 2) || (metric_type == 3)
-        text(x+0.12, minval(x)+0.01, sprintf('%0.3f', minval(x)), 'fontsize', fs, 'fontweight', 'bold');  
+        text(x+0.12, minval(x)+0.01, sprintf('%0.3f', minval(x)), 'fontsize', fs, 'fontweight', 'bold');
         text(x+0.12, maxval(x)-0.02, sprintf('%0.3f', maxval(x)), 'fontsize', fs, 'fontweight', 'bold');
     else
-        text(x+0.12, minval(x), sprintf('%0.1f', minval(x)), 'fontsize', fs, 'fontweight', 'bold');  
+        text(x+0.12, minval(x), sprintf('%0.1f', minval(x)), 'fontsize', fs, 'fontweight', 'bold');
         text(x+0.12, maxval(x), sprintf('%0.1f', maxval(x)), 'fontsize', fs, 'fontweight', 'bold');
     end
 end
 text(0.1, avgval, sprintf('%0.3f', avgval), 'fontsize', fs, 'fontweight', 'bold');
 
 if (metric_type == 1) || (metric_type == 2) || (metric_type == 3)
-     ymax = min(round((max(maxval)+0.15)*10)/10,1);
+    ymax = min(round((max(maxval)+0.15)*10)/10,1);
 else
-     ymax = max(maxval) + 5;
+    ymax = max(maxval) + 5;
 end
 axis([0 numel(fnames)+1 0 ymax]);
 
-set(gca, 'xtick', 1:numel(fnames)); 
+set(gca, 'xtick', 1:numel(fnames));
 set(gca, 'xticklabel', xticklab);
 set(gca, 'ygrid', 'on')
 set(gca, 'xgrid', 'on')
@@ -92,7 +92,7 @@ minval = minval_a/length(rtotal);
 
 figure(f)
 xticklab = {'frontal', 'rear', 'side'};
-resall0 = [maxval]; 
+resall0 = [maxval];
 resall1 = [minval];
 x=2:7;
 n=1;
@@ -103,25 +103,25 @@ for k = 1:numel(resall0)
     plot(x(n+1),resall1(k), '+', 'linewidth', 4, 'markersize', 2);
     set(gca, 'fontsize', fs, 'FontWeight', 'bold');
     if (metric_type == 1) || (metric_type == 2)
-        text(x(n)+0.12, resall0(k), sprintf('%0.2f', resall0(k)), 'FontSize', fs, 'FontWeight', 'bold'); 
+        text(x(n)+0.12, resall0(k), sprintf('%0.2f', resall0(k)), 'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.2f', resall1(k)), 'FontSize', fs, 'FontWeight', 'bold');
     else
-        text(x(n)+0.12, resall0(k), sprintf('%0.1f', resall0(k)), 'FontSize', fs, 'FontWeight', 'bold'); 
+        text(x(n)+0.12, resall0(k), sprintf('%0.1f', resall0(k)), 'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.1f', resall1(k)), 'FontSize', fs, 'FontWeight', 'bold');
     end
     n = n+2;
 end
 n = 1;
 for i=1:numel(resall0)
-       plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
-       set(gca, 'fontsize', fs, 'FontWeight', 'bold');
-       n = n+2;
+    plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
+    set(gca, 'fontsize', fs, 'FontWeight', 'bold');
+    n = n+2;
 end
 
 if (metric_type == 1) || (metric_type == 2) || (metric_type == 3)
-     ymax = 1;
+    ymax = 1;
 else
-     ymax = max(max(resall0), max(resall1)) + 5;
+    ymax = max(max(resall0), max(resall1)) + 5;
 end
 
 axis([1 8 0 ymax]);
@@ -151,10 +151,10 @@ oth = mean([rtotal(:).oth]);
 
 figure(f), hold off;
 p=pie([correct opp nearby oth], ...
-  {['Correct: ' num2str(round(correct)) '%'], ...
-   ['Opposite: ' num2str(round(opp)) '%'], ...
-   ['Nearby: ' num2str(round(nearby)) '%'], ...
-   ['Other: ' num2str(round(oth)) '%']}); 
+    {['Correct: ' num2str(round(correct)) '%'], ...
+    ['Opposite: ' num2str(round(opp)) '%'], ...
+    ['Nearby: ' num2str(round(nearby)) '%'], ...
+    ['Other: ' num2str(round(oth)) '%']});
 set(p(2:2:length(p)),'FontSize',20, 'FontWeight', 'bold');
 title(detector, 'fontsize', fs, 'fontweight', 'bold')
 colormap([1 1 1 ; [79 129 189]/255 ; [192 80 77]/255 ; [77 192 80]/255*1.2 ; [128 100 162]/255]);
@@ -188,12 +188,12 @@ medError = medError/length(rtotal);
 figure(f)
 plot([0.1:0.1:0.9],ap,'r','LineWidth',4);
 hold on;
-plot([0.1:0.1:0.9],aos,'b','LineWidth',4); 
+plot([0.1:0.1:0.9],aos,'b','LineWidth',4);
 plot([0.1:0.1:0.9],avp,'g','LineWidth',4);
 plot([0.1:0.1:0.9],peap,'k','LineWidth',4);
 
 xticks = 0.1:0.1:0.9;
-set(gca, 'xtick', xticks); 
+set(gca, 'xtick', xticks);
 set(gca, 'xticklabel', xticks, 'fontsize', fs);
 axis([0 1 0 1]);
 set(gca, 'ygrid', 'on')
@@ -208,11 +208,11 @@ hold off;
 
 f=f+1;
 figure(f)
-plot([0.1:0.1:0.9],mae,'b','LineWidth',4); 
+plot([0.1:0.1:0.9],mae,'b','LineWidth',4);
 hold on;
-plot([0.1:0.1:0.9],medError,'g','LineWidth',4); 
+plot([0.1:0.1:0.9],medError,'g','LineWidth',4);
 xticks = 0.1:0.1:0.9;
-set(gca, 'xtick', xticks); 
+set(gca, 'xtick', xticks);
 set(gca, 'xticklabel', xticks, 'fontsize', fs);
 axis([0 1 0 max(mae) + 20]);
 set(gca, 'ygrid', 'on')
@@ -259,10 +259,10 @@ switch metric_type
             AOS_average, ignore_NEAR_aos, correct_NEAR_aos; ...
             AOS_average, ignore_OTH_aos, correct_OTH_aos];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_aos correct_NEAR_aos correct_OTH_aos])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -301,10 +301,10 @@ switch metric_type
             AVP_average, ignore_NEAR_avp, correct_NEAR_avp; ...
             AVP_average, ignore_OTH_avp, correct_OTH_avp];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_avp correct_NEAR_avp correct_OTH_avp])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -343,10 +343,10 @@ switch metric_type
             PEAP_average, ignore_NEAR_peap, correct_NEAR_peap; ...
             PEAP_average, ignore_OTH_peap, correct_OTH_peap];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_peap correct_NEAR_peap correct_OTH_peap])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -385,10 +385,10 @@ switch metric_type
             MAE_average, ignore_NEAR_mae, correct_NEAR_mae; ...
             MAE_average, ignore_OTH_mae, correct_OTH_mae];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_mae correct_NEAR_mae correct_OTH_mae])+10))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -422,15 +422,15 @@ switch metric_type
         correct_NEAR_mederr = correct_NEAR_mederr/length(rtotal);
         ignore_OTH_mederr = ignore_OTH_mederr/length(rtotal);
         correct_OTH_mederr = correct_OTH_mederr/length(rtotal);
-
+        
         y = [MedErr_average, ignore_OPP_mederr, correct_OPP_mederr; ...
             MedErr_average, ignore_NEAR_mederr, correct_NEAR_mederr; ...
             MedErr_average, ignore_OTH_mederr, correct_OTH_mederr];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_mederr correct_NEAR_mederr correct_OTH_mederr])+10))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -500,8 +500,6 @@ title(detector, 'fontsize', fs, 'fontweight', 'bold')
 %% Aspect Ratio Analysis overview
 f= f +1;
 figure(f), hold off;
-tickstr = {};
-np=0;
 
 switch metric_type
     case 1
@@ -540,7 +538,7 @@ minval_b = minval_b/length(rtotal);
 minval=[maxval_a, minval_a,maxval_b, minval_b];
 
 xticklab = {'XT', 'T', 'W', 'XW'};
-resall0 = [maxval]; 
+resall0 = [maxval];
 resall1 = [minval];
 x=2:9;
 n=1;
@@ -552,12 +550,12 @@ for k = 1:numel(resall0)
     set(gca, 'fontsize', fs, 'FontWeight', 'bold');
     if (metric_type == 1) || (metric_type == 2)
         text(x(n)+0.12, resall0(k), sprintf('%0.2f', resall0(k)), ...
-            'FontSize', fs, 'FontWeight', 'bold'); 
+            'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.2f', resall1(k)), ...
             'FontSize', fs, 'FontWeight', 'bold');
     else
         text(x(n)+0.12, resall0(k), sprintf('%0.1f', resall0(k)), ...
-            'FontSize', fs, 'FontWeight', 'bold'); 
+            'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.1f', resall1(k)), ...
             'FontSize', fs, 'FontWeight', 'bold');
     end
@@ -565,14 +563,14 @@ for k = 1:numel(resall0)
 end
 n = 1;
 for i=1:numel(resall0)
-       plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
-       set(gca, 'fontsize', fs, 'FontWeight', 'bold');
-       n = n+2;
+    plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
+    set(gca, 'fontsize', fs, 'FontWeight', 'bold');
+    n = n+2;
 end
 if (metric_type == 1) || (metric_type == 2) || (metric_type == 3)
-     ymax = 1;
+    ymax = 1;
 else
-     ymax = max(max(resall0), max(resall1)) + 10;
+    ymax = max(max(resall0), max(resall1)) + 10;
 end
 
 axis([1 10 0 ymax]);
@@ -616,7 +614,7 @@ switch metric_type
         results_all.mederr = mean([rtotal(:).MedError]);
         maxval=[results_all.mederr, results_all.mederr, results_all.mederr, results_all.mederr];
 end
-    
+
 maxval_a = zeros(1,length(rtotal(1).extrasmall));
 minval_a = zeros(1,length(rtotal(1).small));
 maxval_b = zeros(1,length(rtotal(1).large));
@@ -636,7 +634,7 @@ minval_b = minval_b/length(rtotal);
 minval=[maxval_a, minval_a,maxval_b, minval_b];
 
 xticklab = {'XS', 'S', 'L', 'XL'};
-resall0 = [maxval]; 
+resall0 = [maxval];
 resall1 = [minval];
 x=2:9;
 n=1;
@@ -648,12 +646,12 @@ for k = 1:numel(resall0)
     set(gca, 'fontsize', fs, 'FontWeight', 'bold');
     if (metric_type == 1) || (metric_type == 2)
         text(x(n)+0.12, resall0(k), sprintf('%0.2f', resall0(k)), ...
-            'FontSize', fs, 'FontWeight', 'bold'); 
+            'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.2f', resall1(k)), ...
             'FontSize', fs, 'FontWeight', 'bold');
     else
         text(x(n)+0.12, resall0(k), sprintf('%0.1f', resall0(k)), ...
-            'FontSize', fs, 'FontWeight', 'bold'); 
+            'FontSize', fs, 'FontWeight', 'bold');
         text(x(n+1)+0.12, resall1(k), sprintf('%0.1f', resall1(k)), ...
             'FontSize', fs, 'FontWeight', 'bold');
     end
@@ -661,14 +659,14 @@ for k = 1:numel(resall0)
 end
 n = 1;
 for i=1:numel(resall0)
-       plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
-       set(gca, 'fontsize', fs, 'FontWeight', 'bold');
-       n = n+2;
+    plot([x(n) x(n+1)], [resall0(i) resall1(i)], 'b-', 'linewidth', 4);
+    set(gca, 'fontsize', fs, 'FontWeight', 'bold');
+    n = n+2;
 end
 if (metric_type == 1) || (metric_type == 2) || (metric_type == 3)
-     ymax = 1;
+    ymax = 1;
 else
-     ymax = max(max(resall0), max(resall1)) + 10;
+    ymax = max(max(resall0), max(resall1)) + 10;
 end
 
 axis([1 10 0 ymax]);

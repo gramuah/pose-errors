@@ -111,10 +111,10 @@ switch metric_type
             AOS, ignore_NEAR_aos, correct_NEAR_aos; ...
             AOS, ignore_OTH_aos, correct_OTH_aos];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_aos correct_NEAR_aos correct_OTH_aos])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -124,17 +124,17 @@ switch metric_type
         set(gca, 'yticklabel', {'OPP', 'NEAR', 'OTH'});
         set(gca, 'fontsize', fs);
         title(resultfp.name)
-
+        
     case 2
-
+        
         y = [AVP, ignore_OPP_avp, correct_OPP_avp; ...
             AVP, ignore_NEAR_avp, correct_NEAR_avp; ...
             AVP, ignore_OTH_avp, correct_OTH_avp];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_avp correct_NEAR_avp correct_OTH_avp])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -149,10 +149,10 @@ switch metric_type
             PEAP, ignore_NEAR_peap, correct_NEAR_peap; ...
             PEAP, ignore_OTH_peap, correct_OTH_peap];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([correct_OPP_peap correct_NEAR_peap correct_OTH_peap])+0.005))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -162,16 +162,16 @@ switch metric_type
         set(gca, 'yticklabel', {'OPP', 'NEAR', 'OTH'});
         set(gca, 'fontsize', fs);
         title(resultfp.name)
-
+        
     case 4
         y = [MAE, ignore_OPP_mae, correct_OPP_mae; ...
             MAE, ignore_NEAR_mae, correct_NEAR_mae; ...
             MAE, ignore_OTH_mae, correct_OTH_mae];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([ignore_NEAR_mae correct_NEAR_mae MAE])+0.5))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -181,16 +181,16 @@ switch metric_type
         set(gca, 'yticklabel', {'OPP', 'NEAR', 'OTH'});
         set(gca, 'fontsize', fs);
         title(resultfp.name)
-
+        
     case 5
         y = [MedErr, ignore_OPP_mederr, correct_OPP_mederr; ...
             MedErr, ignore_NEAR_mederr, correct_NEAR_mederr; ...
             MedErr, ignore_OTH_mederr, correct_OTH_mederr];
         x = [1 2 3];
-
+        
         figure(f), hold off;
         barh(x, y);
-
+        
         xlim = [0 ceil((max([ignore_NEAR_mederr correct_NEAR_mederr MAE])+0.5))];
         set(gca, 'xlim', xlim);
         set(gca, 'xminortick', 'on');
@@ -218,10 +218,10 @@ resultclass.nearby = nearby;
 resultclass.oth = oth;
 
 p=pie([correct opp nearby oth], ...
-  {['Correct: ' num2str(round(correct)) '%'], ...
-   ['Opposite: ' num2str(round(opp)) '%'], ...
-   ['Nearby: ' num2str(round(nearby)) '%'], ...
-   ['Other: ' num2str(round(oth)) '%']}); 
+    {['Correct: ' num2str(round(correct)) '%'], ...
+    ['Opposite: ' num2str(round(opp)) '%'], ...
+    ['Nearby: ' num2str(round(nearby)) '%'], ...
+    ['Other: ' num2str(round(oth)) '%']});
 
 set(p(2:2:length(p)),'FontSize',20, 'FontWeight', 'bold');
 title(resultfp.name, 'fontsize', fs, 'fontweight', 'bold')

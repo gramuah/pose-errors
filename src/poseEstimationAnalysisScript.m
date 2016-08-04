@@ -4,10 +4,11 @@
 dataset = 'PASCAL3D+';
 
 SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
-SHOW_QUALITATIVE = 0;
-DO_TEX = 1;
-DO_OVERLAP_CRITERIA_ANALYSIS = 1;
-SAVE_SUMMARY = 1;
+SAVE_QUALITATIVE = 0; % set true to save qualitative results
+SHOW_FIGURES = 1;     % set true to show plots
+DO_TEX = 1; % set true to realize and save info report
+DO_OVERLAP_CRITERIA_ANALYSIS = 1; % set true to do overlap analysis
+SAVE_SUMMARY = 1; % set true to save a txt file with the main results 
 
 % specify which pose estimators and detectors to evaluate
 full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
@@ -17,7 +18,7 @@ dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
 
  % objects to analyze (could be a subset)
-objnames_selected  = {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
+objnames_selected  =  {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
     'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'};
 
 tp_display_localization = 'strong'; % set to 'weak' to do analysis with a high localization error
@@ -31,6 +32,10 @@ flag_diningtable = 0;
 % 5: MedError;
 metric_type = 2;
 
+set(0,'DefaultFigureVisible','on')
+if ~SHOW_FIGURES
+    set(0,'DefaultFigureVisible','off')
+end
 
 for d = 1:numel(detectors)  % loops through each detector and performs analysis
     
@@ -288,7 +293,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         %% Qualitative Results
         result.name =  objnames_selected{o};
         result.resultdir =  resultdir;
-        if SHOW_QUALITATIVE
+        if SAVE_QUALITATIVE
             showQualitative(dataset_params.imdir, ann.rec, result);
         end
         
