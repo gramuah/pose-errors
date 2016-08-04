@@ -128,7 +128,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
         %% Analysis I (False Positive & Metrics)
         mkdir(fullfile(resultdir, sprintf('%s/analysisI/', objnames_selected{o})));
-        [resultclass,Nfig] = displayPoseAnalysisPlot(result_fp, result, metric_type);
+        [resultclass,Nfig] = displayPoseAnalysisPlots(result_fp, result, metric_type);
         
         resulttotal(o).correct = resultclass.correct;
         resulttotal(o).opp = resultclass.opp;
@@ -220,7 +220,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         close all;
        
         %% Obj.Characteristcs on Pose Estimation and Summary
-        [resultclass, Nfig] = displayImpactPosePlot(result_fp, result,detector, metric_type);
+        [resultclass, Nfig] = displayImpactPosePlots(result_fp, result,detector, metric_type);
         resulttotal(o).ap = resultclass.ap;
         resulttotal(o).aos = resultclass.aos;
         resulttotal(o).avp = resultclass.avp;
@@ -255,7 +255,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
         %% Analysis III (Precision/Recall Curves)
         mkdir(fullfile(resultdir, sprintf('%s/analysisIII/curves/', objnames_selected{o})));
-        [Nfig, avp_views, peap_views] = displayPrecRecPlot(result_fp, result);
+        [Nfig, avp_views, peap_views] = displayPrecRecPlots(result_fp, result);
         resulttotal(o).avp_views = avp_views;
         resulttotal(o).peap_views = peap_views;
         for f = 1:Nfig

@@ -76,7 +76,7 @@ assigned ground truth objects to detections with best score or overlap.
 analyzePoseError: Analysis of Main Pose Errors and computes effects of each type of 
 pose estimation performance. Pose Error Analysis (False Positive Study)
 
-displayPoseAnalysisPlot: Draws plots for the results obtained by the
+displayPoseAnalysisPlots: Draws plots for the results obtained by the
 analysis of Main Pose Errors. Analysis I (False Positive & Metrics)
 
 displayPerCharacteristicPlots: Analysis II. Object Characteristic influences on
@@ -85,10 +85,10 @@ Detection & Pose Estimation.
 showQualitative: If SHOW_QUALITATIVE flag is true shows and saves qualitative 
 results 
 
-displayImpactPosePlot: Draws plots for the rest of the object characteristics 
+displayImpactPosePlots: Draws plots for the rest of the object characteristics 
 and summarizes statistics for all object characteristic effects
 
-displayPrecRecPlot: Analysis III (Precision/Recall Curves). Displays 
+displayPrecRecPlots: Analysis III (Precision/Recall Curves). Displays 
 precision-recall curves for detection and pose estimation. AP, AOS, AVP and 
 PEAP curves.  
 
