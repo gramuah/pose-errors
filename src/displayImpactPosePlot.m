@@ -180,7 +180,7 @@ end
 %%%%
 f = f + 1;
 
-tmp = [resultfp.pose.diff];
+tmp = [result.pose.diff];
 diff_aos = mean([tmp.aos]);
 diff_avp = mean([tmp.avp15]);
 diff_peap = mean([tmp.peap15]);

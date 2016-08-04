@@ -51,6 +51,7 @@ result.det.view = det.view;
 result.det.conf = det.conf;
 result.det.gtnum = det.gtnum;
 result.det.rnum = det.rnum;
+result.det.isduplicate = det.isduplicate;
 
 %% Obtaining Precision-recall curves
 
@@ -58,6 +59,34 @@ result.det.rnum = det.rnum;
 npos = sum(~[gt.isdiff]);
 dummy = [];
 [result.pose, dummy] = averagePoseDetectionPrecision(det, gt, npos);
+
+% Detection and pose estimation considering the difficult objects as well
+npos = length(gt.bbox);%
+result.pose.diff = averagePoseDetectionPrecision(det, gt, npos, 1);
+
+result.diff_nondiff(1) = result.pose.diff;
+
+result.gt.diffnondiff = zeros(gt.N, 1);
+deto = det;
+npos = 0;
+rec = ann.rec;
+for k = 1:gt.N    
+       
+    r = gt.rnum(k);
+    o = gt.onum(k);
+    if rec(r).objects(o).difficult == 1       
+        result.gt.trunc_occ(k) = 1;
+        i = (det.label==0 & det.gtnum==k);
+        deto.label(i) = 1;
+        npos = npos+1;
+    else 
+         i = (det.label==1 & det.gtnum==k);
+         deto.label(i) = 0;
+    end
+    
+end
+dummy = [];
+[result.diff_nondiff(2), dummy] = averagePoseDetectionPrecision(deto, gt, npos);
 
 %% Object Characteristic Analysis 
 % (occ/trunc. objects, object size, aspect ratio, part visibility, visible side)

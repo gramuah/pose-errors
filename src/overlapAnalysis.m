@@ -1,4 +1,4 @@
-function [resultclass, result,f] = overlapAnalysis(dataset, objname, dataset_params, ann, det, metric_type, detector)
+function [resultclass, result, f] = overlapAnalysis(dataset, objname, dataset_params, ann, det, metric_type, detector, result)
 
 [sv, si] = sort(det.conf, 'descend');
 det.bbox = det.bbox(si, :);
@@ -13,13 +13,13 @@ for i=1:length(overlapNames)
     localization = overlapNames{i};
     [det, gt] = matchDetectionsWithGroundTruth(dataset, dataset_params, objname, ann, det, localization);
     npos = sum(~[gt.isdiff]);
-    result.pose.ovanalisys(i) = averagePoseDetectionPrecision(det, gt, npos);
-    aos(i) = result.pose.ovanalisys(i).aos;
-    avp(i) = result.pose.ovanalisys(i).avp15;
-    peap(i) = result.pose.ovanalisys(i).peap15;
-    mae(i)= result.pose.ovanalisys(i).mean_error;
-    medError(i)= result.pose.ovanalisys(i).median_error;
-    ap(i) = result.pose.ovanalisys(i).ap; 
+    result.pose.ovanalysis(i) = averagePoseDetectionPrecision(det, gt, npos);
+    aos(i) = result.pose.ovanalysis(i).aos;
+    avp(i) = result.pose.ovanalysis(i).avp15;
+    peap(i) = result.pose.ovanalysis(i).peap15;
+    mae(i)= result.pose.ovanalysis(i).mean_error;
+    medError(i)= result.pose.ovanalysis(i).median_error;
+    ap(i) = result.pose.ovanalysis(i).ap; 
 end
 resultclass.aos = aos;
 resultclass.avp = avp;

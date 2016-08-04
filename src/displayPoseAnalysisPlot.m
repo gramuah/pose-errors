@@ -104,7 +104,7 @@ resultclass.correct_NEAR_MedError = correct_NEAR_mederr;
 resultclass.ignore_OTH_MedError = ignore_OTH_mederr;
 resultclass.correct_OTH_MedError = correct_OTH_mederr;
 
-%% Metric Study (Fig: 1, 2, 3, 4 and 5)
+%% Pose Error Study (Fig: 1)
 switch metric_type
     case 1
         y = [AOS, ignore_OPP_aos, correct_OPP_aos; ...
@@ -202,7 +202,7 @@ switch metric_type
         title(resultfp.name)
 end
 
-%% Count Pie Chart --> Error Analysis (Fig: 5)
+%% Count Pie Chart --> Error Analysis (Fig: 2)
 
 f = f + 1;
 figure(f), hold off;
@@ -227,7 +227,7 @@ set(p(2:2:length(p)),'FontSize',20, 'FontWeight', 'bold');
 title(resultfp.name, 'fontsize', fs, 'fontweight', 'bold')
 colormap([1 1 1 ; [79 129 189]/255 ; [192 80 77]/255 ; [77 192 80]/255*1.2 ; [128 100 162]/255]);
 
-%% Pose Analysis (Fig: 6 and 7)
+%% Pose Analysis (Fig: 3 and 4)
 
 f = f + 1;
 xviewpointlabels = {'F', 'F-L', 'L', 'L-RE', 'RE', 'RE-R', 'R', 'R-F'};

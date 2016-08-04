@@ -14,7 +14,7 @@ switch dataset
   case 'PASCAL3D+'
     sourceDir = '../PASCAL3D+';
     dataset_params.imset = 'test';  % set used for analysis
-    dataset_params.imdir = [sourceDir '/data/PASCAL3D+_release1.1/PASCAL/VOCdevkit/VOC2012/JPEGImages']; % needs to be set for your computer
+    dataset_params.imdir = '/home/carolina/projects/pose-estimation/eccv2016/eval_code/PASCAL3D+/data/PASCAL3D+_release1.1/PASCAL/VOCdevkit/VOC2012/JPEGImages'%[sourceDir '/data/PASCAL3D+_release1.1/PASCAL/VOCdevkit/VOC2012/JPEGImages']; % needs to be set for your computer
     dataset_params.VOCsourcepath = './eval_code/src/VOCcode';  % change this for later VOC versions
     dataset_params.VOCset = 'PASCAL3D';
     dataset_params.dataBaseDir = [sourceDir '/data/PASCAL3D+_release1.1'];

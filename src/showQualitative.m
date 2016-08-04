@@ -11,9 +11,7 @@ function showQualitative(imdir, rec, result)
 %   result: output of the analyzeTrueDetections function
 
 for o = 1:numel(result)
-  gt = result(o).gt;
-  pn = gt.pn;
-  
+     
   si=[];
   [sv, si] = sort(result.det.conf, 'descend');
   det.bbox = result.det.bbox(si, :);
@@ -21,7 +19,7 @@ for o = 1:numel(result)
   det.rnum = result.det.rnum(si);
   det.view = result.det.view(si, :);
   det.labels = result.pose.labels(si, :);
-  det.duplicate = result.pose.isduplicate(si, :);
+  det.duplicate = result.det.isduplicate(si, :);
   c=1;
   mkdir([result.resultdir, '/', result.name,'/qualitative/true_det/bad_opp']);
   mkdir([result.resultdir, '/', result.name,'/qualitative/true_det/bad_nearby']);
@@ -31,12 +29,7 @@ for o = 1:numel(result)
   mkdir([result.resultdir, '/', result.name,'/qualitative/false_det/duplicate']);
   mkdir([result.resultdir, '/', result.name,'/qualitative/diff_det']);
   for k = 1:length(result.det.conf)
-%       if k == 122 
-%           disp('db')
-%       end
-%       if k == 72 
-%           disp('db')
-%       end
+
       if result.det.gtnum(si(k)) ~= 0 
           if det.labels(k) == 1
            
@@ -48,17 +41,10 @@ for o = 1:numel(result)
             
               bboxgt = result.gt.bbox(result.det.gtnum(si(k)), :);
               hold on, plot(bboxgt([1 1 3 3 1]), bboxgt([2 4 4 2 2]), 'g--', 'linewidth', 6);
-    
-    %Arrow
-%     vx=[(bbox(1) + round((bbox(3)-bbox(1))/2) + 0) (bbox(1) + round((bbox(3)-bbox(1))/2) + 0) ...
-%         (bbox(1) + round((bbox(3)-bbox(1))/2) + 10) (bbox(1) + round((bbox(3)-bbox(1))/2) + 0) ...
-%         (bbox(1) + round((bbox(3)-bbox(1))/2) - 10)];
-%     vy=[(bbox(2) + round((bbox(4)-bbox(2))/2) + 0) (bbox(2) + round((bbox(4)-bbox(2))/2) + 70) ...
-%         (bbox(2) + round((bbox(4)-bbox(2))/2) + 40) (bbox(2) + round((bbox(4)-bbox(2))/2) + 70) ...
-%         (bbox(2) + round((bbox(4)-bbox(2))/2) + 40)];
+
               vx=[0 0 10 0 -10];
               vy=[0 70 40 70 40];
-                %Rotate arrow
+              % Rotate arrow
               vec=[vx;vy];
               B=[cosd((view(1))) -sind((view(1)));sind((view(1))) cosd((view(1)))];
               vecR=B*vec;
@@ -110,8 +96,7 @@ for o = 1:numel(result)
               end
             
           end
-          if (det.labels(k) == -1) && (det.duplicate(k) == 1)
-              
+          if (det.labels(k) == -1) && (det.duplicate(k) == 1)              
              
               im = imread(fullfile(imdir, rec(result.det.rnum(si(k))).filename));
               bbox = result.det.bbox(si(k),:);

@@ -4,20 +4,20 @@
 dataset = 'PASCAL3D+';
 
 SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
-SHOW_QUALITATIVE = 0;
+SHOW_QUALITATIVE = 1;
 DO_TEX = 1;
 DO_OVERLAP_CRITERIA_ANALYSIS = 1;
 SAVE_SUMMARY = 1;
 
 % specify which pose estimators and detectors to evaluate
 full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
-detectors = {'bhf', 'vdpm', 'vpskps', 'vpskps-gt'}; % detectors to analyze 
+detectors = {'bhf'}; % detectors to analyze 
 
 dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
 
 objnames_selected  = {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
-       'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'}; % objects to analyze (could be a subset)    
+      'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'}; % objects to analyze (could be a subset)    
   
 tp_display_localization = 'strong'; % set to 'weak' to do analysis with a high localization error
 flag_diningtable = 0;
@@ -94,7 +94,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         fprintf('Pose Error Analysis (False Positive Study): %s\n', objname);
         
         if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES        
-            [result_fp, resultclass] = analyzeII(dataset, dataset_params, ann, o_ind, det, ...
+            [result_fp, resultclass] = analyzePoseError(dataset, dataset_params, ann, o_ind, det, ...
                 tp_display_localization);
             resulttotal(o).obj = resultclass.obj;
             resulttotal(o).err  = resultclass.err;
@@ -120,13 +120,11 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         fprintf('%s\n', objnames_selected{o})
         tmp = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, objnames_selected{o}, localization)));
         result(1) = tmp.result;
-        
+                
         clear result_fp;
         objname = objnames_selected{o};
         tmp = load(fullfile(resultdir, sprintf('%s/results_II_%s_%s.mat', objname, objname, localization)));
-   
-        result_fp(1) = orderfields(tmp.result_fp); 
-        result(1).diff_nondiff = result_fp(1).diff_nondiff;
+        result_fp(1) = tmp.result_fp;
         
         %% Analysis I (False Positive & Metrics)
         mkdir(fullfile(resultdir, sprintf('%s/analysisI/', objnames_selected{o})));
@@ -173,11 +171,11 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         resulttotal(o).correct_OTH_MedError = resultclass.correct_OTH_MedError;
         
         % Save plots:
-        % Metric Study: AOS if metric_type = 1, AVP if metric_type = 2, PEAP if metric_type = 3,
-        % MAE if metric_type = 4, and MedError if metric_type = 5. 
-        % Pie Chart: 2. 
-        % Pose Distrib.: 3. 
-        % Success Rate&Errors: 4.
+        % Fig. 1 Pose Error Analysis: AOS if metric_type = 1, AVP if metric_type = 2, PEAP if metric_type = 3,
+        % MAE if metric_type = 4, and MedError if metric_type = 5; 
+        % Fig. 2 Pie Chart. 
+        % Fig. 3 Pose Distrib. 
+        % Fig. 4 Success Rate;
         for f = 1:Nfig
             print('-dpdf', ['-f' num2str(f)], ...
                 fullfile(resultdir, sprintf('%s/analysisI/plot_%d.pdf', objnames_selected{o},f)));
@@ -268,8 +266,8 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         if DO_OVERLAP_CRITERIA_ANALYSIS
             det = readDetections(dataset, dataset_params, ann, objnames_selected{o});
             mkdir(fullfile(resultdir, sprintf('%s/analysisIII/ov_analysis/', objnames_selected{o})));
-            [resultclass,result,Nfig] = overlapAnalysis(dataset, objnames_selected{o},...
-                dataset_params, ann, det, metric_type, detector);
+            [resultclass, result, Nfig] = overlapAnalysis(dataset, objnames_selected{o},...
+                dataset_params, ann, det, metric_type, detector, result);
             resulttotal(o).ov_aos = resultclass.aos;
             resulttotal(o).ov_avp = resultclass.avp;
             resulttotal(o).ov_peap = resultclass.peap;
