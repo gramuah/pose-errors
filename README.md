@@ -71,7 +71,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
          Contains annotations for objects (excluding "difficult" objects, as defined
          by VOC and PASCAL 3D+ annotations). The file Labels.txt contains the name of the 
-         parts defined on PASCAL3D+, visible parts and other object characteristics, such as object sizes and aspect ratios.  
+         parts defined on PASCAL 3D+, visible parts and other object characteristics, such as object sizes and aspect ratios.  
 
    
    + src: 
