@@ -4,26 +4,27 @@
 dataset = 'PASCAL3D+';
 
 SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
-SHOW_QUALITATIVE = 1;
+SHOW_QUALITATIVE = 0;
 DO_TEX = 1;
 DO_OVERLAP_CRITERIA_ANALYSIS = 1;
 SAVE_SUMMARY = 1;
 
 % specify which pose estimators and detectors to evaluate
 full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
-detectors = {'bhf'}; % detectors to analyze 
+detectors = {'bhf'}; % detectors to analyze
 
 dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
 
-objnames_selected  = {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
-      'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'}; % objects to analyze (could be a subset)    
-  
+ % objects to analyze (could be a subset)
+objnames_selected  = {'aeroplane', 'bicycle'}%{'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
+    %'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'};
+
 tp_display_localization = 'strong'; % set to 'weak' to do analysis with a high localization error
 flag_diningtable = 0;
 
 %% Metric type:
-% 1: AOS; 
+% 1: AOS;
 % 2: AVP;
 % 3: PEAP;
 % 4: MAE;
@@ -32,95 +33,93 @@ metric_type = 2;
 
 
 for d = 1:numel(detectors)  % loops through each detector and performs analysis
-  
-  detector = detectors{d};
-  fprintf('\nEvaluating pose estimator: %s\n\n', detector);
-  
-  % sets detector paths, may need to be modified for your detector
-  [dataset_params.detpath, resultdir, detname] = setDetectorInfo(detector); 
-  if ~exist(resultdir, 'file'), mkdir(resultdir); end;
     
-  % reads the records, attaches annotations: requires modification if not
-  % using PASCAL3D+
-  ann = readDatasetAnnotations(dataset, dataset_params);
-  outdir = resultdir;
-  
-  %% For each selected object --> Object Characteristic Analysis 
-  for o = 1:numel(objnames_selected)
-      
-      objname = objnames_selected{o};
-      if ~exist(fullfile(outdir, sprintf('%s', objname)));
-          mkdir(fullfile(outdir, sprintf('%s', objname)))
-      end
-      outfile = fullfile(outdir, sprintf('%s/results_%s_%s.mat', objname, objname, ...
-          tp_display_localization));
-      if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES
-         
-        fprintf('Object Characteristic Analysis: %s\n', objname);
+    detector = detectors{d};
+    fprintf('\nEvaluating pose estimator: %s\n\n', detector);
+    
+    % sets detector paths, may need to be modified for your detector
+    [dataset_params.detpath, resultdir, detname] = setDetectorInfo(detector);
+    if ~exist(resultdir, 'file'), mkdir(resultdir); end;
+    
+    % reads the records, attaches annotations: requires modification if not
+    % using PASCAL3D+
+    ann = readDatasetAnnotations(dataset, dataset_params);
+    outdir = resultdir;
+    resulttotal = struct([]);
+    %% For each selected object --> Object Characteristic Analysis
+    for o = 1:numel(objnames_selected)
         
-        % Read Detections
-        det = readDetections(dataset, dataset_params, ann, objname);
-               outdir = resultdir;
-        if ~exist(outdir, 'file'), mkdir(outdir); end;  
-
+        objname = objnames_selected{o};
+        if ~exist(fullfile(outdir, sprintf('%s', objname)));
+            mkdir(fullfile(outdir, sprintf('%s', objname)))
+        end
+        outfile = fullfile(outdir, sprintf('%s/results_%s_%s.mat', objname, objname, ...
+            tp_display_localization));
         if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES
-          result = analyzeDetections(dataset, dataset_params, objname, det, ann, ...
-              tp_display_localization);
-          save(fullfile(outdir, sprintf('%s/results_I_%s_%s.mat', objname, objname, ...
-          tp_display_localization)), 'result', '-v7.3');
-          clear result;
+            
+            fprintf('Object Characteristic Analysis: %s\n', objname);
+            
+            % Read Detections
+            det = readDetections(dataset, dataset_params, ann, objname);
+            outdir = resultdir;
+            if ~exist(outdir, 'file'), mkdir(outdir); end;
+            
+            if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES
+                result = analyzeDetections(dataset, dataset_params, objname, det, ann, ...
+                    tp_display_localization);
+                save(fullfile(outdir, sprintf('%s/results_I_%s_%s.mat', objname, objname, ...
+                    tp_display_localization)), 'result', '-v7.3');
+                clear result;
+            end
         end
-      end
-  end
-  
-  fprintf('\n\n');
-  %% For each selected object --> Pose Error Analysis (False Positive Study)
-  for o = 1:numel(objnames_selected)
-       
-      objname = objnames_selected{o}; 
-      if strcmp(objname, 'diningtable')
-          flag_diningtable = 1;
-      end
-      outfile = fullfile(outdir, sprintf('%s/results_II_%s_%s', objname, objname, ...
-          tp_display_localization));
-      if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES        
-        o_ind = find(strcmp(objnames_all, objname));
- 
-        % Read Detections
-        det = readDetections(dataset, dataset_params, ann, objname); 
-
-        if ~exist(outdir, 'file'), mkdir(outdir); end;  
+    end
+    
+    fprintf('\n\n');
+    %% For each selected object --> Pose Error Analysis (False Positive Study)
+    
+    for o = 1:numel(objnames_selected)
         
-        fprintf('Pose Error Analysis (False Positive Study): %s\n', objname);
-        
-        if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES        
-            [result_fp, resultclass] = analyzePoseError(dataset, dataset_params, ann, o_ind, det, ...
-                tp_display_localization);
-            resulttotal(o).obj = resultclass.obj;
-            resulttotal(o).err  = resultclass.err;
-            result_fp.name = objname;
-            result_fp.o = o_ind;
-            save(outfile, 'result_fp', '-v7.3');
-            clear result_fp;
+        objname = objnames_selected{o};
+        if strcmp(objname, 'diningtable')
+            flag_diningtable = 1;
         end
-        
-       end
-  end
-  
-  %% Create plots and .txt files for the analysis
-  localization = tp_display_localization; 
-     
-           
-      clear result;
-      close all;
-      
-      for o = 1:numel(objnames_selected)
+        outfile = fullfile(outdir, sprintf('%s/results_II_%s_%s', objname, objname, ...
+            tp_display_localization));
+        if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES
+            o_ind = find(strcmp(objnames_all, objname));
+            
+            % Read Detections
+            det = readDetections(dataset, dataset_params, ann, objname);
+            
+            if ~exist(outdir, 'file'), mkdir(outdir); end;
+            
+            fprintf('Pose Error Analysis (False Positive Study): %s\n', objname);
+            
+            if ~exist(outfile, 'file') || ~SKIP_SAVED_FILES
+                [result_fp, resultclass] = analyzePoseError(dataset, dataset_params, ann, o_ind, det, ...
+                    tp_display_localization);
+                resulttotal(o).obj = resultclass.obj;
+                resulttotal(o).err  = resultclass.err;
+                result_fp.name = objname;
+                result_fp.o = o_ind;
+                save(outfile, 'result_fp', '-v7.3');
+                clear result_fp;
+            end
+            
+        end
+    end
+    
+    %% Create plots and .txt files for the analysis
+    localization = tp_display_localization;
+    
+    for o = 1:numel(objnames_selected)
         fprintf('\n\nObtaining result for the class: %s\n', objnames_selected{o});
         clear result;
         fprintf('%s\n', objnames_selected{o})
-        tmp = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, objnames_selected{o}, localization)));
+        tmp = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, ...
+            objnames_selected{o}, localization)));
         result(1) = tmp.result;
-                
+        
         clear result_fp;
         objname = objnames_selected{o};
         tmp = load(fullfile(resultdir, sprintf('%s/results_II_%s_%s.mat', objname, objname, localization)));
@@ -172,9 +171,9 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
         % Save plots:
         % Fig. 1 Pose Error Analysis: AOS if metric_type = 1, AVP if metric_type = 2, PEAP if metric_type = 3,
-        % MAE if metric_type = 4, and MedError if metric_type = 5; 
-        % Fig. 2 Pie Chart. 
-        % Fig. 3 Pose Distrib. 
+        % MAE if metric_type = 4, and MedError if metric_type = 5;
+        % Fig. 2 Pie Chart.
+        % Fig. 3 Pose Distrib.
         % Fig. 4 Success Rate;
         for f = 1:Nfig
             print('-dpdf', ['-f' num2str(f)], ...
@@ -193,32 +192,34 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         % Save plots
         % Detection Analysis:
         % Obj. Characteristics:
-        % Fig. 1 Occluded Objects; 
-        % Fig. 2 Obj. Size Analysis; 
+        % Fig. 1 Occluded Objects;
+        % Fig. 2 Obj. Size Analysis;
         % Fig. 3 Aspect Ratio Analysis;
-        % Fig. 4 Truncated Objects; 
-        % Fig 5 Trunc/Occ. Objects; 
+        % Fig. 4 Truncated Objects;
+        % Fig 5 Trunc/Occ. Objects;
         % Fig 6 Diff. Objects;
-        % Fig. 7 Visible part effect; 
+        % Fig. 7 Visible part effect;
         % Fig. 8 Visible side influence;
         for f = 1:Nfig-2
             print('-dpdf', ['-f' num2str(f)], ...
-                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_detection/plot_%d.pdf',objnames_selected{o}, f)));
+                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_detection/plot_%d.pdf', ...
+                objnames_selected{o}, f)));
         end
         
         % Save plots
         % Pose Analysis:
         % Obj. Characteristics:
-        % Fig. 10 Visible part effect; 
+        % Fig. 10 Visible part effect;
         % Fig. 11 Visible side influence;
         save_aux = 1;
         for f = Nfig-1:Nfig
             print('-dpdf', ['-f' num2str(f)], ...
-                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_pose/plot_%d.pdf',objnames_selected{o}, save_aux)));
+                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_pose/plot_%d.pdf', ...
+                objnames_selected{o}, save_aux)));
             save_aux = save_aux + 1;
         end
         close all;
-       
+        
         %% Obj.Characteristcs on Pose Estimation and Summary
         [resultclass, Nfig] = displayImpactPosePlots(result_fp, result,detector, metric_type);
         resulttotal(o).ap = resultclass.ap;
@@ -244,13 +245,14 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         % Pose Estimation Analysis:
         % Obj. Characteristics:
         % Fig. 3 Trunc/Occ. Objects;.
-        % Fig. 4 Diff. Objects; 
+        % Fig. 4 Diff. Objects;
         % Fig. 5 Obj. Size Analysis;
         % Fig. 6 Aspect Ratio Analysis;
         % Fig. 7 Summary of Sensitivity and Impact;
         for f = 1:Nfig
             print('-dpdf', ['-f' num2str(f)], ...
-                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_pose/plot_%d.pdf',objnames_selected{o}, f+save_aux-1)));
+                fullfile(resultdir, sprintf('%s/analysisII/obj_charact_pose/plot_%d.pdf', ...
+                objnames_selected{o}, f+save_aux-1)));
         end
         
         %% Analysis III (Precision/Recall Curves)
@@ -260,7 +262,8 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         resulttotal(o).peap_views = peap_views;
         for f = 1:Nfig
             print('-dpdf', ['-f' num2str(f)], ...
-                fullfile(resultdir, sprintf('%s/analysisIII/curves/plot_%d.pdf', objnames_selected{o}, f)));
+                fullfile(resultdir, sprintf('%s/analysisIII/curves/plot_%d.pdf', ...
+                objnames_selected{o}, f)));
         end
         close all;
         if DO_OVERLAP_CRITERIA_ANALYSIS
@@ -276,72 +279,77 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             resulttotal(o).ov_ap = resultclass.ap;
             for f = 1:Nfig
                 print('-dpdf', ['-f' num2str(f)], ...
-                    fullfile(resultdir, sprintf('%s/analysisIII/ov_analysis/plot_%d.pdf',objnames_selected{o}, f)));
+                    fullfile(resultdir, sprintf('%s/analysisIII/ov_analysis/plot_%d.pdf', ...
+                    objnames_selected{o}, f)));
             end
             close all;
         end
-
+        
         %% Qualitative Results
         result.name =  objnames_selected{o};
         result.resultdir =  resultdir;
         if SHOW_QUALITATIVE
-            showQualitative(dataset_params.imdir, ann.rec, result); 
-        end        
+            showQualitative(dataset_params.imdir, ann.rec, result);
+        end
         
         clear result;
         clear result_fp;
         close all;
         
-      end
-      
-      Nfig = summaryErrorDataset(detector, resulttotal, flag_diningtable, metric_type);
-      for f = 1:Nfig
-          print('-dpdf', ['-f' num2str(f)], ...
-                    fullfile(resultdir, sprintf('plot_%d.pdf', f)));
-      end
-      outfile = [resultdir, '/results_total.mat'];
-      save(outfile, 'resulttotal', '-v7.3');
-      close all;   
-         
-      if SAVE_SUMMARY
-      
-          for o = 1:numel(objnames_selected)
-            tmp1 = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, objnames_selected{o}, ...
+    end
+    
+    Nfig = summaryErrorDataset(detector, resulttotal, flag_diningtable, metric_type);
+    for f = 1:Nfig
+        print('-dpdf', ['-f' num2str(f)], ...
+            fullfile(resultdir, sprintf('plot_%d.pdf', f)));
+    end
+    outfile = [resultdir, '/results_total.mat'];
+    save(outfile, 'resulttotal', '-v7.3');
+    close all;
+    
+    if SAVE_SUMMARY
+        resultSummary = struct([]);
+        for o = 1:numel(objnames_selected)
+            tmp1 = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, ...
+                objnames_selected{o}, ...
                 tp_display_localization)));
-            resultSummary(o).tp = tmp1.result; 
-            tmp2 = load(fullfile(resultdir, sprintf('%s/results_II_%s_%s.mat', objnames_selected{o}, objnames_selected{o}, ...
+            resultSummary(o).tp = tmp1.result;
+            tmp2 = load(fullfile(resultdir, sprintf('%s/results_II_%s_%s.mat', objnames_selected{o}, ...
+                objnames_selected{o}, ...
                 tp_display_localization)));
             resultSummary(o).fp = tmp2.result_fp;
             clear tmp1.result;
             clear tmp2.result_fp;
             close all;
-          end
-         % text summary
-         writeAnalysisSummary(resultSummary, objnames_selected, detname, ...
-         fullfile(resultdir, sprintf('Analysis_Summary_%s.txt', detector)));
-          
-      end
-      clear resultSummary;
-     
-      close all;
+        end
+        % text summary
+        writeAnalysisSummary(resultSummary, objnames_selected, detname, ...
+            fullfile(resultdir, sprintf('Analysis_Summary_%s.txt', detector)));
+        
+    end
+    clear resultSummary;
     
-      if DO_TEX
+    close all;
+    
+    if DO_TEX
         if ~exist(fullfile(resultdir, 'tex'), 'file'), mkdir(fullfile(resultdir, 'tex')); end;
-            system(sprintf('cp ../results/%s/*.tex %s', detector, fullfile(resultdir, 'tex')));
-            writeTexHeader(fullfile(resultdir, 'tex'), detector)
-            avp_matrix = reshape([resulttotal.avp_views],4,length(objnames_selected));
-            peap_matrix = reshape([resulttotal.peap_views],4,length(objnames_selected));
-            writeTableResults(fullfile(resultdir, 'tex'), detector, resulttotal, avp_matrix, peap_matrix, dataset, objnames_selected, metric_type);
-            writeNumObjClass(fullfile(resultdir, 'tex'), objnames_selected);
-            for o = 1:numel(objnames_selected)
-                ind = strmatch(objnames_selected{o}, objnames_all, 'exact');
-                writeTexObject(objnames_selected{o}, fullfile(resultdir, 'tex'), ann.gt(ind), metric_type, dataset, detector); 
-            end
-      end
-      clear resulttotal;
-      clear result;
-      clear result_fp;
-      close all;
+        system(sprintf('cp ../results/%s/*.tex %s', detector, fullfile(resultdir, 'tex')));
+        writeTexHeader(fullfile(resultdir, 'tex'), detector)
+        avp_matrix = reshape([resulttotal.avp_views],4,length(objnames_selected));
+        peap_matrix = reshape([resulttotal.peap_views],4,length(objnames_selected));
+        writeTableResults(fullfile(resultdir, 'tex'), detector, resulttotal, ...
+            avp_matrix, peap_matrix, dataset, objnames_selected, metric_type);
+        writeNumObjClass(fullfile(resultdir, 'tex'), objnames_selected);
+        for o = 1:numel(objnames_selected)
+            ind = strmatch(objnames_selected{o}, objnames_all, 'exact');
+            writeTexObject(objnames_selected{o}, fullfile(resultdir, 'tex'), ...
+                ann.gt(ind), metric_type, dataset, detector);
+        end
+    end
+    clear resulttotal;
+    clear result;
+    clear result_fp;
+    close all;
 end %End for(detectors)
 clear all;
 %exit;
