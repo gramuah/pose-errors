@@ -52,7 +52,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
        3) Add a corresponding entry to setDetectorInfo.m and update detector variable in 
        poseEstimationAnalysisScript.m
 
-       4) Perform all steps of CASE I
+       4) Perform [2-4] steps of CASE I
 	
    + CASE III: Include a new dataset and your own pose estimators
 
