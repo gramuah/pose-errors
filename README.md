@@ -29,11 +29,13 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
    + CASE I: PASCAL 3D+ dataset and VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators.
 
-         1) In poseEstimationAnalysisScript.m, set all flags on top to 1 (true)   
+         1) Download [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html)
+
+         2) In poseEstimationAnalysisScript.m, set all flags on top to 1 (true)   
    
-         2) In setDatasetParameters.m, set the imdir path to a valid directory of PASCAL 3D+ images
+         3) In setDatasetParameters.m, set the imdir path to a valid directory of PASCAL 3D+ images
    
-         3) Run poseEstimationAnalysisScript.m in Matlab
+         4) Run poseEstimationAnalysisScript.m in Matlab
 
    + CASE II: PASCAL 3D+ dataset and your own pose estimators
 
@@ -46,7 +48,6 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
       
          example: 2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43 
    
-
          2) Add a corresponding entry to setDetectorInfo.m and update detector variable in 
          poseEstimationAnalysisScript.m
 
@@ -54,11 +55,13 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 	
    + CASE III: Include a new dataset and your own pose estimators
 
-         1) Include the new dataset parameters in setDatasetParameters.m
+         1) Add the new dataset in the annotations folder
 
-         2) Modify readDatasetAnnotations.m for maximum compatibility to PASCAL 3D+ dataset (see Code_explanation.txt) 
+         2) Include the new dataset parameters in setDatasetParameters.m
 
-         3) Perform all steps of CASE II
+         3) Modify readDatasetAnnotations.m for maximum compatibility to PASCAL 3D+ dataset (see Code_explanation.txt) 
+
+         4) Perform all steps of CASE II
 
 
 ## DESCRIPTION OF FOLDERS:
