@@ -29,7 +29,7 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
    + CASE I: PASCAL 3D+ dataset and VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators.
 
-         1) Download [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html)
+         1) Download [PASCAL 3D+ dataset] (http://cvgl.stanford.edu/projects/pascal3d.html)
 
          2) In poseEstimationAnalysisScript.m, set all flags on top to 1 (true)   
    
@@ -39,19 +39,20 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 
    + CASE II: PASCAL 3D+ dataset and your own pose estimators
 
-         1) Create a subdirectory of detector within detections. 
-         For each object category, a .txt file is needed to realize the pose analysis.
-         These files contain for each row the detections and estimations obtained by the
-         detectors. The format for each detections is: 
+         1) Create a subdirectory with the detector name within detections. 
+         
+         2) Create a text file of detector for each object category.
+         These file contain for each row the detections and estimations obtained by the
+         detector. The format for each detection is: 
 
-         image_name (without extension, \ie '.jpg') score x1 y1 x2 y2 azimuth zenith
+                       image_name (without extension, \ie '.jpg') score x1 y1 x2 y2 azimuth zenith
       
-         example: 2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43 
+                       example: 2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43 
    
-         2) Add a corresponding entry to setDetectorInfo.m and update detector variable in 
+         3) Add a corresponding entry to setDetectorInfo.m and update detector variable in 
          poseEstimationAnalysisScript.m
 
-         3) Perform all steps of CASE I
+         4) Perform all steps of CASE I
 	
    + CASE III: Include a new dataset and your own pose estimators
 
