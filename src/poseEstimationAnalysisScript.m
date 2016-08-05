@@ -262,7 +262,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
         %% Analysis III (Precision/Recall Curves)
         mkdir(fullfile(resultdir, sprintf('%s/analysisIII/curves/', objnames_selected{o})));
-        [Nfig, avp_views, peap_views] = displayPrecRecPlots(result_fp, result);
+        [Nfig, avp_views, peap_views] = displayPrecRecPlots(result);
         resulttotal(o).avp_views = avp_views;
         resulttotal(o).peap_views = peap_views;
         for f = 1:Nfig

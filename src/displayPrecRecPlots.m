@@ -1,4 +1,12 @@
-function [f, avp_views, peap_views] = displayPrecRecPlots(result_fp, result)
+function [f, avp_views, peap_views] = displayPrecRecPlots(result)
+%function [f, avp_views, peap_views] = displayPrecRecPlots(result)
+%
+% Save and display prec-rec curves (AP, aos,avp and peap)
+%
+% Inputs:
+% results: detection results
+
+
 close all;
 fs = 18;
 f = 1;
