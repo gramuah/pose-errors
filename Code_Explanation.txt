@@ -82,9 +82,6 @@ analysis of Main Pose Errors. Analysis I (False Positive & Metrics)
 displayPerCharacteristicDetPlots: Analysis II. Object Characteristic influences on
 Detection.
 
-showQualitative: If SHOW_QUALITATIVE flag is true shows and saves qualitative 
-results 
-
 displayPerCharacteristicPosePlots: Draws plots for the object characteristics
 effect on pose estimation and summarizes statistics for all object characteristic influences
 
@@ -94,6 +91,9 @@ PEAP curves.
 
 overlapAnalisys: If DO_OVERLAP_CRITERIA_ANALISYS flag is true realize a study of 
 pose estimation performance for several overlap criteria 
+
+showQualitative: If SHOW_QUALITATIVE flag is set true shows and saves qualitative 
+results.
 
 writeAnalysisSummary: If SAVE_SUMMARY flag is true creates text file 
 summarizing the results of the analysis
