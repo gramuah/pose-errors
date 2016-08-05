@@ -11,8 +11,8 @@ close all;
 fs = 18;
 f = 1;
 figure(f)
-plot(result.pose.r,result.pose.p,'b','LineWidth',4); 
-hold on; 
+plot(result.pose.r,result.pose.p,'b','LineWidth',4);
+hold on;
 plot(result.pose.r,result.pose.p_aos,'g','LineWidth',4);
 plot(result.pose.r,result.pose.p_avp15,'r','LineWidth',4);
 plot(result.pose.r_peap30,result.pose.p_peap15,'k','LineWidth',4);
@@ -27,8 +27,8 @@ f = f + 1;
 hold off;
 
 figure(f)
-plot(result.pose.r,result.pose.p,'b','LineWidth',4); 
-hold on; 
+plot(result.pose.r,result.pose.p,'b','LineWidth',4);
+hold on;
 plot(result.pose.r,result.pose.p_avp_bins(:,1),'g','LineWidth',4);
 plot(result.pose.r,result.pose.p_avp_bins(:,2),'y','LineWidth',4);
 plot(result.pose.r,result.pose.p_avp_bins(:,3),'Color', [0.2 0.3 0.4],'LineWidth',4);
@@ -50,8 +50,8 @@ f = f + 1;
 hold off;
 
 figure(f)
-plot(result.pose.r,result.pose.p,'b','LineWidth',4); 
-hold on; 
+plot(result.pose.r,result.pose.p,'b','LineWidth',4);
+hold on;
 plot(result.pose.r_peap_bins(:,1),result.pose.p_peap_bins(:,1),'g','LineWidth',4);
 plot(result.pose.r_peap_bins(:,2),result.pose.p_peap_bins(:,2),'y','LineWidth',4);
 plot(result.pose.r_peap_bins(:,3),result.pose.p_peap_bins(:,3),'Color', [0.2 0.3 0.4],'LineWidth',4);

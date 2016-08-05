@@ -17,7 +17,10 @@ detectors = {'bhf'}; % detectors to analyze
 dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
 
- % objects to analyze (could be a subset)
+% overlap criteria to do the analysis (could be a subset)
+overlapNames = dataset_params.overlapNames; %(by default all)
+
+% objects to analyze (could be a subset)
 objnames_selected  =  {'aeroplane', 'bicycle', 'boat', 'bus', 'car', ...
     'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'};
 
@@ -275,7 +278,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             det = readDetections(dataset, dataset_params, ann, objnames_selected{o});
             mkdir(fullfile(resultdir, sprintf('%s/analysisIII/ov_analysis/', objnames_selected{o})));
             [resultclass, result, Nfig] = overlapAnalysis(dataset, objnames_selected{o},...
-                dataset_params, ann, det, metric_type, detector, result);
+                dataset_params, ann, det, metric_type, detector, result, overlapNames);
             resulttotal(o).ov_aos = resultclass.aos;
             resulttotal(o).ov_avp = resultclass.avp;
             resulttotal(o).ov_peap = resultclass.peap;
