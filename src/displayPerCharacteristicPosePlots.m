@@ -1,4 +1,13 @@
-function  [resultclass, f] = displayImpactPosePlots(resultfp, result, detector, error_type)
+function  [resultclass, f] = displayPerCharacteristicPosePlots(resultfp, result, detector, error_type)
+%function [resutclass,f] = displayPerCharacteristicDetPlots(results_all, error_type)
+%
+% Object characteristic effect on pose estimation: save and display plots
+%
+% Inputs:
+% result: detection results
+% resultfp: pose error results (false positives)
+% error_type: metric to analysis
+
 
 close all
 switch error_type

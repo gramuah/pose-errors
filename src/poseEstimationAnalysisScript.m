@@ -5,7 +5,7 @@ dataset = 'PASCAL3D+';
 
 SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
 SAVE_QUALITATIVE = 0; % set true to save qualitative results
-SHOW_FIGURES = 1;     % set true to show plots
+SHOW_FIGURES = 0;     % set true to show plots
 DO_TEX = 1; % set true to realize and save info report
 DO_OVERLAP_CRITERIA_ANALYSIS = 1; % set true to do overlap analysis
 SAVE_SUMMARY = 1; % set true to save a txt file with the main results 
@@ -132,7 +132,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
         %% Analysis I (False Positive & Metrics)
         mkdir(fullfile(resultdir, sprintf('%s/analysisI/', objnames_selected{o})));
-        [resultclass,Nfig] = displayPoseAnalysisPlots(result_fp, result, metric_type);
+        [resultclass,Nfig] = displayPoseErrorAnalysisPlots(result_fp, result, metric_type);
         
         resulttotal(o).correct = resultclass.correct;
         resulttotal(o).opp = resultclass.opp;
@@ -190,7 +190,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         mkdir(fullfile(resultdir, sprintf('%s/analysisII/obj_charact_pose/', objnames_selected{o})));
         
         %% Obj.Characteristcs on Detection
-        [resutclass,Nfig] = displayPerCharacteristicPlots(result, metric_type);
+        [resutclass,Nfig] = displayPerCharacteristicDetPlots(result, metric_type);
         resulttotal(o).side_1 = resutclass.side_1;
         resulttotal(o).side_2 = resutclass.side_2;
         
@@ -226,7 +226,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         close all;
         
         %% Obj.Characteristcs on Pose Estimation and Summary
-        [resultclass, Nfig] = displayImpactPosePlots(result_fp, result,detector, metric_type);
+        [resultclass, Nfig] = displayPerCharacteristicPosePlots(result_fp, result,detector, metric_type);
         resulttotal(o).ap = resultclass.ap;
         resulttotal(o).aos = resultclass.aos;
         resulttotal(o).avp = resultclass.avp;

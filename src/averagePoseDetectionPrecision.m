@@ -1,22 +1,20 @@
 function [result, resultclass] = averagePoseDetectionPrecision(det, gt, npos, diff_flag)
-% result = averagePoseDetectionPrecision(det, gt, npos, nnorm)
+% result = averagePoseDetectionPrecision(det, gt, npos, diff_flag)
 %
-% Computes full interpolated average precision, first normalizing the 
-% precision values.  
-% Normally, p = tp ./ (fp + tp), but this is sensitive to the density of
-% positive examples.  
+% Computes full interpolated average precision
+% Normally, p = tp ./ (fp + tp)
 %
 % Input:
 %   det(ndet, 1): detections
 %   gt: ground truth annotations
 %   npos: the number of ground truth positive examples
-%   nnorm: the normalized value for number of positives (for normalized AP)
+%   diff_flag: set true to consider the difficult objects (by default 0)
 %
 % Output:
 %   result.(labels, conf, npos, r, p, ap, ap_std, MAE, MedErr, std_err, ...
 %               aos, avp):
-%     the precision-recall and normalized precision-recall curves with AP
-%     and standard error of AP. Pose estimation analysis: aos, avp, MAE and MedErr 
+%     the precision-recall and aos, avp and peap precision-recall curves. 
+%     Pose estimation analysis: aos, avp, peap, MAE and MedErr
 %
 
 if nargin < 4
@@ -24,9 +22,9 @@ if nargin < 4
 end
 
 [sv, si] = sort(det.conf, 'descend');
-label = det.label(si); 
+label = det.label(si);
 label_pose = zeros(length(det.label),1); % label (-1, 1; 0=don't care)
-ind_fp=find(label==-1);
+
 if diff_flag
     ind_tp=find(label==1 | label==0);
 else
@@ -49,24 +47,25 @@ viewcountvector_opp = zeros(1,8);
 viewcountvector_near = zeros(1,8);
 viewcountvector_oth = zeros(1,8);
 gtviewcountvector = gt.gtviewvector;
-error_azimuth = [];
+error_azimuth = zeros(1, length(ind_tp));
 vnum_test = [4 8 16 24];
 tmp_bins=zeros(length(label), size(vnum_test,2));
 tp_peap_bins=zeros(length(label), size(vnum_test,2));
 fp_peap_bins=ones(length(label), size(vnum_test,2));
 resultclass.obj = zeros(1,length(label));
 resultclass.err = zeros(1,length(label));
+
 for h=1:length(ind_tp)
-    if gt.viewpoint(det.gtnum(ind_tp(h))).azimuth ~= 0 
-         gtview = gt.viewpoint(det.gtnum(ind_tp(h))).azimuth;
+    if gt.viewpoint(det.gtnum(ind_tp(h))).azimuth ~= 0
+        gtview = gt.viewpoint(det.gtnum(ind_tp(h))).azimuth;
     else
-         gtview = gt.viewpoint(det.gtnum(ind_tp(h))).azimuth_coarse;
+        gtview = gt.viewpoint(det.gtnum(ind_tp(h))).azimuth_coarse;
     end
     error_azimuth(h) = min(mod(det.view(ind_tp(h),1)-gtview,360), ...
         mod(gtview-det.view(ind_tp(h),1),360));
     
-        resultclass.obj(h) = det.gtnum(ind_tp(h));
-        resultclass.err(h) = error_azimuth(h);
+    resultclass.obj(h) = det.gtnum(ind_tp(h));
+    resultclass.err(h) = error_azimuth(h);
     
     tmp(ind_tp(h))=(1 + cos((error_azimuth(h)*pi)/180))/2; % AOS
     
@@ -102,14 +101,14 @@ for h=1:length(ind_tp)
             fp_peap_bins(ind_tp(h),av)=1;
         end
     end
-    %% error classification: 
-    % label 1 --> error < 15 (correct); 
-    % label 2 -->  error > 165 (opposite); 
+    %% error classification:
+    % label 1 --> error < 15 (correct);
+    % label 2 -->  error > 165 (opposite);
     % label 3 --> 15 < error < 30 (nearby);
     % label 4 --> others
     
     flag = 0;
-       
+    
     if error_azimuth(h) <= 15
         label_pose(ind_tp(h)) = 1;
         flag = 1;
@@ -137,7 +136,7 @@ for h=1:length(ind_tp)
         if gtview <= 340 && gtview > 295
             viewcountvector(8) = viewcountvector(8) + 1;
         end
-           
+        
     end
     
     if error_azimuth(h) > 165
@@ -277,7 +276,8 @@ p_avp30=accV./(fp+tp)';
 p_avp15=accV_15 ./(fp+tp)';
 
 
-result = struct('labels', label, 'labels_pose', label_pose, 'hist_views', viewcountvector, 'hist_gt_views', gtviewcountvector, ...
+result = struct('labels', label, 'labels_pose', label_pose, 'hist_views', ...
+    viewcountvector, 'hist_gt_views', gtviewcountvector, ...
     'hist_opp_views', viewcountvector_opp, 'hist_near_views', viewcountvector_near, ...
     'hist_oth_views', viewcountvector_oth,'conf', conf, 'r', r, 'p', p, ...
     'p_aos', p_aos, 'p_avp30', p_avp30, ...
@@ -291,9 +291,9 @@ result.median_error = median_error;
 result.std_error = std_error;
 
 for av=1:size(vnum_test,2)
-     result.p_avp_bins(:,av) =  p_avp_bins(:,av);
-     result.p_peap_bins(:,av) =  p_peap(:,av);
-     result.r_peap_bins(:,av) =  r_peap(:,av);
+    result.p_avp_bins(:,av) =  p_avp_bins(:,av);
+    result.p_peap_bins(:,av) =  p_peap(:,av);
+    result.r_peap_bins(:,av) =  r_peap(:,av);
 end
 
 %% Error types
@@ -315,11 +315,11 @@ missed = zeros(npos-sum(label==1),1);
 result.ap_stderr = std([p(istp(:)) ; missed])/sqrt(npos);
 
 %% compute interpolated precision and normalized precision for pose (AOS, AVP and PEAP)
-% AOS 
+% AOS
 [result.aos, result.aos_pi] = calcule_ap(r, p_aos);
 result.aos_stderr = std([p_aos(istp(:))' ; missed])/sqrt(npos);
 
-% AVP 
+% AVP
 [result.avp30, result.avp_pi30] = calcule_ap(r, p_avp30);
 result.avp_stderr30 = std([p_avp30(istp(:))' ; missed])/sqrt(npos);
 

@@ -1,4 +1,13 @@
-function [resultclass, f]=displayPoseAnalysisPlots(resultfp, result, metric_type)
+function [resultclass, f] = displayPoseErrorAnalysisPlots(resultfp, result, metric_type)
+% function [resultclass, f] = displayPoseErrorAnalysisPlots(resultfp, result, metric_type)
+%
+% Pose Error Analisys: display and save plots
+%
+% Inputs: 
+% result: detection results
+% resultfp: pose error results (false positives)
+% error_type: metric to analysis 
+
 
 close all
 fs = 18;

@@ -1,17 +1,17 @@
 function [result, resulclass] = analyzePoseError(dataset, dataset_params, ann, objind, det, localization)
-% result = analyzeII(dataset, dataset_params, ann, objind, similar_ind, det)
-% Error analysis ...
+% result = analyzePoseError(dataset, dataset_params, ann, objind, similar_ind, det)
+% Pose Error Analysis.
 
 switch dataset
     case {'PASCAL3D+'}
-    [result, resulclass] = analyzePoseError_PASCAL3D(dataset, ...
-        dataset_params, ann, objind, det, localization);
+        [result, resulclass] = analyzePoseError_PASCAL3D(dataset, ...
+            dataset_params, ann, objind, det, localization);
         
-  otherwise
-    error('dataset %s is unknown\n', dataset);
-end  
+    otherwise
+        error('dataset %s is unknown\n', dataset);
+end
 
-   
+
 function [result, resulclass] = analyzePoseError_PASCAL3D(dataset, dataset_params, ann, objind, det, localization)
 
 [sv, si] = sort(det.conf, 'descend');
@@ -118,9 +118,9 @@ if hh > 1
     ah=0;
     ai=find(result.pose.labels_pose == 3);
     for j = 1: length(ai);
-         if det.isdiff(ai(j)) == 0
-             ah = ah+1;
-         end
+        if det.isdiff(ai(j)) == 0
+            ah = ah+1;
+        end
     end
     npos = sum(~[gt.isdiff])-ah;
     dummy = [];
@@ -129,11 +129,11 @@ else
     NAMES = fieldnames(det);
     for na=1:length(NAMES)
         det2= setfield(det2,NAMES{na},[]);
-    end 
+    end
     npos = 0;
     result.pose.ignorenearby = [];
 end
-   
+
 
 
 % reassigns nearby error to correct estimations
@@ -163,7 +163,7 @@ ii = find(result.pose.labels_pose == 1 | result.pose.labels_pose == 2 | ...
 hh=1;
 for jj= 1:length(ii)
     result.pose.isother(hh) = ii(jj);
-    hh= hh+1; 
+    hh= hh+1;
 end
 det2 = [];
 if hh > 1
@@ -182,16 +182,16 @@ if hh > 1
     det2.label_occ = det.label_occ(result.pose.isother,:);
     det2.label_trunc = det.label_trunc(result.pose.isother,:);
     det2.isduplicate = det.isduplicate(result.pose.isother,:);
-
+    
     ah=0;
     ai=find(result.pose.labels_pose == 4);
     for j = 1: length(ai);
-         if det.isdiff(ai(j)) == 0
-             ah = ah+1;
-         end
+        if det.isdiff(ai(j)) == 0
+            ah = ah+1;
+        end
     end
     npos = sum(~[gt.isdiff])-ah;
-
+    
     dummy=[];
     [result.pose.ignoreother, dummy] = averagePoseDetectionPrecision(det2, gt, npos);
 else
@@ -203,9 +203,9 @@ ii = [];
 ii = find(result.pose.labels_pose == 4);
 hh=1;
 for jj= 1:length(ii)
-     result.pose.isother2(hh) = ii(jj);
-     hh= hh+1;
-     
+    result.pose.isother2(hh) = ii(jj);
+    hh= hh+1;
+    
 end
 
 det3 = det;
@@ -225,12 +225,12 @@ det2 = [];
 ii = find(result.pose.labels_pose == 1);
 hh=1;
 for jj= 1:length(ii)
-     if det.isdiff(ii(jj)) == 0 
+    if det.isdiff(ii(jj)) == 0
         result.pose.ignall(hh) = ii(jj);
         hh= hh+1;
-     end
+    end
 end
- 
+
 det2.bbox = det.bbox(result.pose.ignall,:);
 det2.conf = det.conf(result.pose.ignall,:);
 det2.rnum = det.rnum(result.pose.ignall,:);
