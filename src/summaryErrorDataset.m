@@ -1,4 +1,16 @@
 function f = summaryErrorDataset(detector, rtotal, flag_diningtable, metric_type)
+% function f = summaryErrorDataset(detector, rtotal, flag_diningtable, metric_type)
+%
+% Summary Pose Error: Save and display plots
+%
+% Inputs:
+% detector: detector name
+% rtotal: results for all selected objects
+% flag_diningtable: control flag for diningtable class to create the
+% success rate histogram
+% metric_type: metric
+
+
 switch metric_type
     case 1
         metric = 'AOS';
@@ -167,6 +179,7 @@ peap = zeros(1,length(rtotal(1).ov_peap));
 mae = zeros(1,length(rtotal(1).ov_mae));
 medError = zeros(1,length(rtotal(1).ov_medError));
 ap = zeros(1,length(rtotal(1).ov_ap));
+ov_vector = rtotal(1).ov_vector;
 
 for mx = 1:length(rtotal)
     aos = aos + rtotal(mx).ov_aos;
@@ -186,16 +199,16 @@ medError = medError/length(rtotal);
 
 
 figure(f)
-plot([0.1:0.1:0.9],ap,'r','LineWidth',4);
+plot(ov_vector,ap,'r','LineWidth',4);
 hold on;
-plot([0.1:0.1:0.9],aos,'b','LineWidth',4);
-plot([0.1:0.1:0.9],avp,'g','LineWidth',4);
-plot([0.1:0.1:0.9],peap,'k','LineWidth',4);
+plot(ov_vector,aos,'b','LineWidth',4);
+plot(ov_vector,avp,'g','LineWidth',4);
+plot(ov_vector,peap,'k','LineWidth',4);
 
-xticks = 0.1:0.1:0.9;
+xticks = ov_vector;
 set(gca, 'xtick', xticks);
 set(gca, 'xticklabel', xticks, 'fontsize', fs);
-axis([0 1 0 1]);
+axis([0 max(ov_vector)+0.1 0 1]);
 set(gca, 'ygrid', 'on')
 set(gca, 'xgrid', 'on')
 hleg=legend('AP', 'AOS', 'AVP', 'PEAP', 'Location','NorthWest');
@@ -208,13 +221,13 @@ hold off;
 
 f=f+1;
 figure(f)
-plot([0.1:0.1:0.9],mae,'b','LineWidth',4);
+plot(ov_vector,mae,'b','LineWidth',4);
 hold on;
-plot([0.1:0.1:0.9],medError,'g','LineWidth',4);
-xticks = 0.1:0.1:0.9;
+plot(ov_vector,medError,'g','LineWidth',4);
+xticks = ov_vector;
 set(gca, 'xtick', xticks);
 set(gca, 'xticklabel', xticks, 'fontsize', fs);
-axis([0 1 0 max(mae) + 20]);
+axis([0 max(ov_vector)+0.1 0 max(mae) + 20]);
 set(gca, 'ygrid', 'on')
 set(gca, 'xgrid', 'on')
 

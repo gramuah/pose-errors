@@ -26,7 +26,11 @@ switch dataset
     dataset_params.objnames_all = {'aeroplane', 'bicycle', 'boat', 'bottle', 'bus', 'car', ...
        'chair', 'diningtable', 'motorbike', 'sofa', 'train', 'tvmonitor'}; 
     
-    % overlap analysis
+    % overlap analysis:
+    % names to specify localization criteria
+    dataset_params.overlapNames = {'weak', 'weak_1', 'weak_2', 'weak_3', 'strong', 'strong_1', 'strong_2', ...
+    'strong_3', 'strong_4'};
+    
 %     'weak'  % also duplicate detections are ignored, per last line
 %     iuthresh = dataset_params.iuthresh_weak;  % intersection/union threshold
 %     idthresh = dataset_params.idthresh_weak;    % intersection/det_area threshold 
@@ -62,10 +66,9 @@ switch dataset
 %     iuthresh = 0.9;
 %     idthresh = 0;
 
-    dataset_params.overlapNames = {'weak', 'weak_1', 'weak_2', 'weak_3', 'strong', 'strong_1', 'strong_2', ...
-    'strong_3', 'strong_4'};
+
    
-    % localization criteria
+    % localization criteria by default
     dataset_params.iuthresh_weak = 0.1;  % intersection/union threshold
     dataset_params.idthresh_weak = 0;    % intersection/det_area threshold
     dataset_params.iuthresh_strong = 0.5;  % intersection/union threshold

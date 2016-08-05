@@ -285,6 +285,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             resulttotal(o).ov_mae = resultclass.mae;
             resulttotal(o).ov_medError = resultclass.medError;
             resulttotal(o).ov_ap = resultclass.ap;
+            resulttotal(o).ov_vector = resultclass.ov_vector;
             for f = 1:Nfig
                 print('-dpdf', ['-f' num2str(f)], ...
                     fullfile(resultdir, sprintf('%s/analysisIII/ov_analysis/plot_%d.pdf', ...
@@ -306,6 +307,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
         
     end
     
+    %% Summary Plots
     Nfig = summaryErrorDataset(detector, resulttotal, flag_diningtable, metric_type);
     for f = 1:Nfig
         print('-dpdf', ['-f' num2str(f)], ...
@@ -339,6 +341,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
     
     close all;
     
+    %% LATEX report
     if DO_TEX
         if ~exist(fullfile(resultdir, 'tex'), 'file'), mkdir(fullfile(resultdir, 'tex')); end;
         system(sprintf('cp ../results/%s/*.tex %s', detector, fullfile(resultdir, 'tex')));

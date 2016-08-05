@@ -2,7 +2,7 @@ function writeTexHeader(outdir, detname)
 
 ch = sprintf('%c', '%');
 if ~exist(outdir, 'file'), mkdir(outdir); end;
-global fid 
+global fid
 fid = fopen(fullfile(outdir, ['header.tex']), 'w');
 
 pr('\\section{Information}\n');

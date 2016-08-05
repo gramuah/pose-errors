@@ -5,7 +5,7 @@ function [resultclass, result, f] = overlapAnalysis(dataset, objname, ...
 %    dataset_params, ann, det, metric_type, detector, result, overlapNames)
 %
 % Overlap Analysis
-% 
+%
 % Inputs:
 % dataset: dataset
 % objname: object name
@@ -30,8 +30,33 @@ peap = zeros(1,length(overlapNames));
 mae = zeros(1,length(overlapNames));
 medError = zeros(1,length(overlapNames));
 ap = zeros(1,length(overlapNames));
+ov_vector = zeros(1,length(overlapNames));
+
 for i=1:length(overlapNames)
     localization = overlapNames{i};
+    switch localization
+        case 'weak'  % also duplicate detections are ignored, per last line
+            ov_vector(i) = 0.1;
+        case 'strong'
+            ov_vector(i) = 0.5;
+        case 'weak_1'
+            ov_vector(i) = 0.2;
+        case 'weak_2'
+            ov_vector(i) = 0.3;
+        case 'weak_3'
+            ov_vector(i) = 0.4;
+        case 'strong_1'
+            ov_vector(i) = 0.6;
+        case 'strong_2'
+            ov_vector(i) = 0.7;
+        case 'strong_3'
+            ov_vector(i) = 0.8;
+        case 'strong_4'
+            ov_vector(i) = 0.9;
+        otherwise
+            error('invalid localization criterion: %s', localization)
+    end
+    
     [det, gt] = matchDetectionsWithGroundTruth(dataset, dataset_params, objname, ann, det, localization);
     npos = sum(~[gt.isdiff]);
     result.pose.ovanalysis(i) = averagePoseDetectionPrecision(det, gt, npos);
@@ -48,6 +73,7 @@ resultclass.peap = peap;
 resultclass.mae = mae;
 resultclass.medError = medError;
 resultclass.ap = ap;
+resultclass.ov_vector = ov_vector;
 
 fs = 18;
 f=1;
@@ -55,13 +81,13 @@ f=1;
 %% AOS
 if metric_type == 1
     figure(f)
-    plot([0.1:0.1:0.9],aos,'b','LineWidth',4);
+    plot(ov_vector,aos,'b','LineWidth',4);
     hold on;
-    plot([0.1:0.1:0.9],ap,'r','LineWidth',4);
-    xticks = 0.1:0.1:0.9;
+    plot(ov_vector,ap,'r','LineWidth',4);
+    xticks = ov_vector;
     set(gca, 'xtick', xticks);
     set(gca, 'xticklabel', xticks, 'fontsize', fs);
-    axis([0 1 0 1]);
+    axis([0 max(ov_vector)+0.1 0 1]);
     set(gca, 'ygrid', 'on')
     set(gca, 'xgrid', 'on')
     title(objname, 'fontsize', fs, 'fontweight', 'bold')
@@ -85,13 +111,13 @@ end
 %% AVP
 if metric_type == 2
     figure(f)
-    plot([0.1:0.1:0.9],avp,'b','LineWidth',4);
+    plot(ov_vector,avp,'b','LineWidth',4);
     hold on;
-    plot([0.1:0.1:0.9],ap,'r','LineWidth',4);
-    xticks = 0.1:0.1:0.9;
+    plot(ov_vector,ap,'r','LineWidth',4);
+    xticks = ov_vector;
     set(gca, 'xtick', xticks);
     set(gca, 'xticklabel', xticks, 'fontsize', fs);
-    axis([0 1 0 1]);
+    axis([0 max(ov_vector)+0.1 0 1]);
     set(gca, 'ygrid', 'on')
     set(gca, 'xgrid', 'on')
     title(objname, 'fontsize', fs, 'fontweight', 'bold')
@@ -115,13 +141,13 @@ end
 %% PEAP
 if metric_type == 3
     figure(f)
-    plot([0.1:0.1:0.9],peap,'b','LineWidth',4);
+    plot(ov_vector,peap,'b','LineWidth',4);
     hold on;
-    plot([0.1:0.1:0.9],ap,'r','LineWidth',4);
-    xticks = 0.1:0.1:0.9;
+    plot(ov_vector,ap,'r','LineWidth',4);
+    xticks =ov_vector;
     set(gca, 'xtick', xticks);
     set(gca, 'xticklabel', xticks, 'fontsize', fs);
-    axis([0 1 0 1]);
+    axis([0 max(ov_vector)+0.1 0 1]);
     set(gca, 'ygrid', 'on')
     set(gca, 'xgrid', 'on')
     title(objname, 'fontsize', fs, 'fontweight', 'bold')
@@ -145,12 +171,12 @@ end
 %% MAE
 if metric_type == 4
     figure(f)
-    plot([0.1:0.1:0.9],mae,'b','LineWidth',4);
+    plot(ov_vector,mae,'b','LineWidth',4);
     hold on;
-    xticks = 0.1:0.1:0.9;
+    xticks = ov_vector;
     set(gca, 'xtick', xticks);
     set(gca, 'xticklabel', xticks, 'fontsize', fs);
-    axis([0 1 0 max(mae) + 20]);
+    axis([0 max(ov_vector)+0.1 0 max(mae) + 20]);
     set(gca, 'ygrid', 'on')
     set(gca, 'xgrid', 'on')
     
@@ -170,12 +196,12 @@ end
 %% MedError
 if metric_type == 5
     figure(f)
-    plot([0.1:0.1:0.9],medError,'b','LineWidth',4);
+    plot(ov_vector,medError,'b','LineWidth',4);
     hold on;
-    xticks = 0.1:0.1:0.9;
+    xticks = ov_vector;
     set(gca, 'xtick', xticks);
     set(gca, 'xticklabel', xticks, 'fontsize', fs);
-    axis([0 1 0 max(mae) + 20]);
+    axis([0 max(ov_vector)+0.1 0 max(mae) + 20]);
     set(gca, 'ygrid', 'on')
     set(gca, 'xgrid', 'on')
     
