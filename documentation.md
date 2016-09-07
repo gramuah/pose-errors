@@ -87,12 +87,12 @@ assigned ground truth objects to detections with best score or overlap.
 + *analyzePoseError.m* 
 
 Analysis of Main Pose Errors and computes effects of each type of 
-pose estimation performance. Pose Error Analysis (False Positive Study)
+pose estimation performance. Pose Error Analysis (False Positive Study).
 
 + *displayPoseErrorAnalysisPlots.m*
 
 Draws plots for the results obtained by the
-analysis of Main Pose Errors. Analysis I (False Positive & Metrics)
+analysis of Main Pose Errors. Analysis I (False Positive & Metrics).
 
 + *displayPerCharacteristicDetPlots.m* 
 
@@ -102,7 +102,7 @@ Detection.
 + *displayPerCharacteristicPosePlots.m*
 
 Draws plots for the object characteristics
-effect on pose estimation and summarizes statistics for all object characteristic influences
+effect on pose estimation and summarizes statistics for all object characteristic influences.
 
 + *displayPrecRecPlots.m* 
 
@@ -113,7 +113,7 @@ PEAP curves.
 + *overlapAnalisys.m*
 
 If DO_OVERLAP_CRITERIA_ANALISYS flag is true realize a study of 
-pose estimation performance for several overlap criteria 
+pose estimation performance for several overlap criteria.
 
 + *showQualitative.m* 
 
@@ -123,19 +123,19 @@ results.
 + *writeAnalysisSummary.m* 
 
 If SAVE_SUMMARY flag is true creates text file 
-summarizing the results of the analysis
+summarizing the results of the analysis.
 
 
 **If DO_TEX flag is true:**
 
 + *writeTexHeader.m*  
 
-Creates tex header file for creating pdf report
+Creates tex header file for creating pdf report.
 
 + *writeTableResults.m* 
 
-Creates a table with the detector results 
+Creates a table with the detector results. 
 
 + *writeTexObject.m* 
 
-Creates tex material for results for one object category
+Creates tex material for results for one object category.
