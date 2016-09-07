@@ -13,9 +13,9 @@ criteria and that contain pose or viewpoint information.
 
    + **Functions that likely require editing:**
 
-> *poseEstimationAnalysisScript.m*
+*poseEstimationAnalysisScript.m*
 
-Script for running all code. The first few lines  contain parameters specifying what analysis and display 
+: Script for running all code. The first few lines  contain parameters specifying what analysis and display 
 functions to call. The dataset type (e.g., 'pascal3d'), list of detectors to analyze, and list of object classes to analyze is also specified here. 
 
 *setDatasetParameters.m*
@@ -28,7 +28,7 @@ specific to the machine; others to the type of dataset.  The list of generally r
 Specifies location of detection files for each detector and directory to place results.
 
 
----- Functions that require editing if not using a PASCAL3D+ dataset ----
++ **Functions that require editing if not using a PASCAL3D+ dataset:**  
 
 readDatasetAnnotations: For maximum compatibility, if using another dataset,
 this should produce the following structure:
@@ -63,7 +63,7 @@ compatibility, this should produce the following structure:
     N: total number of detections
     
 
----- Analisys Functions ----
++ **Diagnostic Tool Functions:**
 
 analyzeDetections: Produces precision-recall curves and obtain a study of 
 the Impact of Object Characteristics on Pose Prediction Error. 
