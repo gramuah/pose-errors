@@ -15,24 +15,24 @@ criteria and that contain pose or viewpoint information.
 
 + *poseEstimationAnalysisScript.m*
 
-   Script for running all code. The first few lines  contain parameters specifying what analysis and display 
+Script for running all code. The first few lines  contain parameters specifying what analysis and display 
 functions to call. The dataset type (e.g., 'pascal3d'), list of detectors to analyze, and list of object classes to analyze is also specified here. 
 
 + *setDatasetParameters.m*
 
-   Specifies specific datset (e.g.,'pascal3d') and paths for images and annotations.  Some parameters are 
+Specifies specific datset (e.g.,'pascal3d') and paths for images and annotations.  Some parameters are 
 specific to the machine; others to the type of dataset.  The list of generally required parameters are explained in the function documentation.
 
 + *setDetectorInfo.m*
 
-   Specifies location of detection files for each detector and directory to place results.
+Specifies location of detection files for each detector and directory to place results.
 
 
 ### Functions that require editing if not using a PASCAL3D+ dataset:  
 
 + *readDatasetAnnotations.m* 
 
-   For maximum compatibility, if using another dataset,
+For maximum compatibility, if using another dataset,
 this should produce the following structure:
 
       ann.
@@ -59,7 +59,7 @@ not available; likewise trunacted and difficult in rec can be set to 0.
 
 + *readDetections.m*
 
-   Reads the output of the object detector. For maximum  compatibility, this should produce the following structure:
+Reads the output of the object detector. For maximum  compatibility, this should produce the following structure:
 
       det.
          bbox(ndetections, [x1 y1 x2 y2]): detection bounding box
@@ -73,12 +73,12 @@ not available; likewise trunacted and difficult in rec can be set to 0.
 
 + *analyzeDetections.m* 
 
-   Produces precision-recall curves and obtain a study of 
+Produces precision-recall curves and obtain a study of 
 the Impact of Object Characteristics on Pose Prediction Error. 
 
 + *matchDetectionsWithGroundTruth.m* 
 
-   Labels detections as incorrect, correct, or 
+Labels detections as incorrect, correct, or 
 don't care.  localization parameter specifies whether localization error 
 should be ignored ('weak') or not ('strong').  If you want to change the
 localization criteria, edit **setDatasetParameters** and/or this function.  Also
@@ -86,43 +86,43 @@ assigned ground truth objects to detections with best score or overlap.
 
 + *analyzePoseError.m* 
 
-   Analysis of Main Pose Errors and computes effects of each type of 
+Analysis of Main Pose Errors and computes effects of each type of 
 pose estimation performance. Pose Error Analysis (False Positive Study)
 
 + *displayPoseErrorAnalysisPlots.m*
 
-   Draws plots for the results obtained by the
+Draws plots for the results obtained by the
 analysis of Main Pose Errors. Analysis I (False Positive & Metrics)
 
 + *displayPerCharacteristicDetPlots.m* 
 
-   Analysis II. Object Characteristic influences on
+Analysis II. Object Characteristic influences on
 Detection.
 
 + *displayPerCharacteristicPosePlots.m*
 
-   Draws plots for the object characteristics
+Draws plots for the object characteristics
 effect on pose estimation and summarizes statistics for all object characteristic influences
 
 + *displayPrecRecPlots.m* 
 
-   Analysis III (Precision/Recall Curves). Displays 
+Analysis III (Precision/Recall Curves). Displays 
 precision-recall curves for detection and pose estimation. AP, AOS, AVP and 
 PEAP curves.  
 
 + *overlapAnalisys.m*
 
-   If DO_OVERLAP_CRITERIA_ANALISYS flag is true realize a study of 
+If DO_OVERLAP_CRITERIA_ANALISYS flag is true realize a study of 
 pose estimation performance for several overlap criteria 
 
 + *showQualitative.m* 
 
-   If SHOW_QUALITATIVE flag is set true shows and saves qualitative 
+If SHOW_QUALITATIVE flag is set true shows and saves qualitative 
 results.
 
 + *writeAnalysisSummary.m* 
 
-   If SAVE_SUMMARY flag is true creates text file 
+If SAVE_SUMMARY flag is true creates text file 
 summarizing the results of the analysis
 
 
@@ -130,12 +130,12 @@ summarizing the results of the analysis
 
 + *writeTexHeader.m*  
 
-   Creates tex header file for creating pdf report
+Creates tex header file for creating pdf report
 
 + *writeTableResults.m* 
 
-   Creates a table with the detector results 
+Creates a table with the detector results 
 
 + *writeTexObject.m* 
 
-   Creates tex material for results for one object category
+Creates tex material for results for one object category
