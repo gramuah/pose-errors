@@ -11,7 +11,7 @@ criteria and that contain pose or viewpoint information.
 
 ## MAIN FUNCTIONS
 
-+ **Functions that likely require editing: **
+   + **Functions that likely require editing:**
 
 ***poseEstimationAnalysisScript.m***
 
