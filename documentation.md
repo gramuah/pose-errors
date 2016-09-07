@@ -11,20 +11,21 @@ criteria and that contain pose or viewpoint information.
 
 ## MAIN FUNCTIONS
 
----- Functions that likely require editing ----
++ **Functions that likely require editing: **
 
-poseEstimationAnalysisScript: Script for running all code.  
-The first few lines  contain parameters specifying what analysis and display 
-functions to call. The dataset type (e.g., 'pascal3d'), list of detectors to 
-analyze, and list of object classes to analyze is also specified here. 
+***poseEstimationAnalysisScript.m**
 
-setDatasetParameters: Specifies specific datset (e.g., 
-'PASCAL3D+') and paths for images and annotations.  Some parameters are 
-specific to the machine; others to the type of dataset.  The list of 
-generally required parameters are explained in the function documentation.
+Script for running all code. The first few lines  contain parameters specifying what analysis and display 
+functions to call. The dataset type (e.g., 'pascal3d'), list of detectors to analyze, and list of object classes to analyze is also specified here. 
 
-setDetectorInfo: Specifies location of detection files
-for each detector and directory to place results.
+***setDatasetParameters.m***
+
+Specifies specific datset (e.g.,'pascal3d') and paths for images and annotations.  Some parameters are 
+specific to the machine; others to the type of dataset.  The list of generally required parameters are explained in the function documentation.
+
+***setDetectorInfo.m*** 
+
+Specifies location of detection files for each detector and directory to place results.
 
 
 ---- Functions that require editing if not using a PASCAL3D+ dataset ----
