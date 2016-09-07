@@ -1,4 +1,4 @@
-# This contains updated instructions for the last version of the analysis code. 
+#### This contains updated instructions for the last version of the Diagnostic Tool Code. 
 
 ------------------------------------------------------------------------------
 
