@@ -2,14 +2,14 @@
 
 ------------------------------------------------------------------------------
 
-The main script is poseEstimationAnalysisScript. Full functionality applies to
-only the PASCAL3D+ dataset because detailed annotations are available only
+The main script is **poseEstimationAnalysisScript**. Full functionality applies to
+only the **PASCAL3D+ dataset** because detailed annotations are available only
 on that dataset. The code has also been written to make it easy to adapt to
 other detection and pose estimation datasets that are based on bounding box 
 criteria and that contain pose or viewpoint information. 
 
 
-MAIN FUNCTIONS
+## MAIN FUNCTIONS
 
 ---- Functions that likely require editing ----
 
