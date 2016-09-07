@@ -13,7 +13,7 @@ criteria and that contain pose or viewpoint information.
 
    + **Functions that likely require editing:**
 
-*poseEstimationAnalysisScript.m*
+> *poseEstimationAnalysisScript.m*
 
 Script for running all code. The first few lines  contain parameters specifying what analysis and display 
 functions to call. The dataset type (e.g., 'pascal3d'), list of detectors to analyze, and list of object classes to analyze is also specified here. 
