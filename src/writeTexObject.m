@@ -63,7 +63,7 @@ if ~isempty(gt)
 end
 pr('\\clearpage')
 pr('\n\n');
-pr('Figure \\ref{fig1%s} summarizes the viewpoint distribution on test set for %s class considering the 8 views described in Section \\ref{info}. Figure \\ref{fig2%s} shows the analysis and the impact on the pose performance of each type of pose error. We also report in Figure \\ref{fig3%s} the success rate  for %s class considering each of the 8 viewpoints described in Section \\ref{info}. ', name, name, name, name, name);
+pr('Figure \\ref{fig1%s} summarizes the viewpoint distribution on the test set for %s class considering the 8 views described in Section \\ref{info}. Figure \\ref{fig2%s} shows the analysis and the impact on the pose performance of each type of pose error. We also report in Figure \\ref{fig3%s} the success rate  for %s class considering each of the 8 viewpoints described in Section \\ref{info}. ', name, name, name, name, name);
 
 if exist(fullfile(outdir(1:end-4), name, 'analysisI/plot_2.pdf'), 'file')
     pr('\\begin{figure}[h]\n');
@@ -98,7 +98,7 @@ if exist(fullfile(outdir(1:end-4), name, 'analysisI/plot_4.pdf'), 'file')
     pr('\\begin{figure}[h]\n')
     pr('\\centering\n');
     pr('\\includegraphics[width=0.85\\textwidth,trim = 20mm 65mm 25mm 65mm, clip]{../%s/analysisI/plot_4.pdf} \n', name);
-    pr('\\caption{\\textbf{Success rate for %s class considering 8 views.} For each of the 8 viewpoints, we report: In \\textcolor{blue}{Blue}, the porcentage of the correct pose estimations. In \\textcolor{cyan}{Cyan}, the porcentage of confusion with the opposite viewpoints. In \\textcolor{yellow}{Yellow}, the porcentage of confusion with nearby viewpoints. In \\textcolor{BrickRed}{Brick Red}, the porcentage of the confusions with other rotations.}\n', name);
+    pr('\\caption{\\textbf{Success rate for %s class considering 8 views.} For each of the 8 viewpoints, we report: In \\textcolor{blue}{Blue}, the percentage of the correct pose estimations. In \\textcolor{cyan}{Cyan}, the percentage of confusion with the opposite viewpoints. In \\textcolor{yellow}{Yellow}, the percentage of confusion with nearby viewpoints. In \\textcolor{BrickRed}{Brick Red}, the percentage of the confusions with other rotations.}\n', name);
     
     pr('\\label{fig3%s}\n', name);
     pr('\\end{figure}\n');

@@ -17,10 +17,10 @@ if ~exist(outdir, 'file'), mkdir(outdir); end;
 global fid
 fid = fopen(fullfile(outdir, ['results.tex']), 'w');
 
-pr('Note that the results shown in this Section are obtained by computing the average over \\textbf{the selected object class} (\\textit{i.e} %d object classes:', length(objects));
+pr('Note that the results shown in this section are obtained by computing the average over \\textbf{the selected object classes} (\\textit{i.e}:');
 for obj=1:length(objects)
     if obj == length(objects)
-        pr(' %s) from %s dataset.\n', objects{obj}, dataset)
+        pr(' %s) included in the %s dataset.\n', objects{obj}, dataset)
     else
         pr(' %s, ', objects{obj})
     end
@@ -29,7 +29,7 @@ end
 
 pr('\n\n')
 
-pr('Tables \\ref{cont_pose} and \\ref{disc_pose} summarize the detection and pose estimation results considering %d object class from %s dataset. Table \\ref{cont_pose} shows the model performance working on continuous pose estimation. For AVP and PEAP the results are obtained considering a threshold equal to $\\frac{\\pi}{12}$.\n Table \\ref{disc_pose} summarizes the results achieve working on discrete pose estimation. The AVP and PEAP metrics are obtained considering different views: 4, 8, 16 and 24.', length(objects), dataset)
+pr('Tables \\ref{cont_pose} and \\ref{disc_pose} summarize the detection and pose estimation results. Table \\ref{cont_pose} shows the model performance working on continuous pose estimation. For AVP and PEAP the results are obtained considering a threshold equal to $\\frac{\\pi}{12}$.\n Table \\ref{disc_pose} summarizes the results achieved working on discrete pose estimation. The AVP and PEAP metrics are obtained considering different viewpoint discretizations: 4, 8, 16 and 24 views.', length(objects), dataset)
 pr('\n\n');
 pr('\\begin{table}[h]\n')
 pr('\\caption{\\textbf{%s: Detection and Continuous Pose Estimation Results on %s dataset. For AVP and PEAP the results are obtained considering a threshold equal to $\\frac{\\pi}{12}$.}}\n', detector, dataset);
@@ -255,8 +255,8 @@ pr('\\end{center}\n');
 pr('\\end{table}\n');
 
 
-pr('Figure \\ref{fig1} summarizes the impact on the pose performance of each type of error. Figure \\ref{fig1a} reports, for the correct detections obtained by the %s model, the frequency and impact on the pose  performance of each type of false positive. For this Figure a pose estimation is considered as: a) correct if its error is $< 15^\\circ$; b) opposite if its pose error is $> 165^\\circ$; c) nearby if its pose error is $\\in [15^\\circ; 30^\\circ]$; d) other for the rest of situations. Figure \\ref{fig1b} shows the impact of different type of pose errors.\n', detector);
-pr('Figure \\ref{fig2} shows the success rate considering 8 viewpoints described in Section \\ref{info}. Hence, considering only the correct detections, Figure \\ref{fig1b} also summarizes the percentage of success and error on pose estimation. \n');
+pr('Figure \\ref{fig1} summarizes the impact on the pose performance of each type of error. Figure \\ref{fig1a} reports, for the correct detections obtained by the %s model, the frequency and impact on the pose  performance of each type of false positive. For this figure a pose estimation is considered as: a) correct if its error is $< 15^\\circ$; b) opposite if its pose error is $> 165^\\circ$; c) nearby if its pose error is $\\in [15^\\circ; 30^\\circ]$; d) other for the rest of situations. Figure \\ref{fig1b} shows the impact of different type of pose errors.\n', detector);
+pr('Figure \\ref{fig2} shows the success rate considering the 8 viewpoints described in Section \\ref{info}. Hence, considering only the correct detections, Figure \\ref{fig1b} also summarizes the percentage of success and error on pose estimation. \n');
 pr('\n');
 pr('\\begin{figure}[h]\n');
 pr('\\centering\n');
@@ -268,7 +268,7 @@ pr('\\subfloat[]{\n');
 pr('\\label{fig1b}\n');
 pr('\\includegraphics[width=0.45\\textwidth,trim = 15mm 65mm 25mm 65mm, clip]{../plot_6.pdf}\n');
 pr('}\n');
-pr('\\caption{\\textbf{Analysis and Impact of Pose Estimation Errors.} (a) Pie chart shows the fraction of pose errors that are due to Opposite viewpoints (Opposite), confusion with Nearby viewpoints (Nearby), confusion with Other rotations (Other). It also reports the porcentage of correct pose estimations (Correct). (b) Impact of Pose Errors. \\textcolor{blue}{Blue Bars} display the %s performance obtained when all estimations are considered. \\textcolor{green}{Green Bars} display the %s improvement by \\textbf{removing} all estimations of one type: \\textbf{OTH} removes confusion with other rotation viewpoints;  \\textbf{NEAR} removes confusion with nearby viewpoints; \\textbf{OPP} removes confusion with opposite viewpoints. \\textcolor{BrickRed}{Brick Red Bars} show the %s improvement by \\textbf{correcting} all estimations of one type: \\textbf{OTH}, \\textbf{NEAR} and \\textbf{OPP}.} \n', metric, metric, metric);
+pr('\\caption{\\textbf{Analysis and Impact of Pose Estimation Errors.} (a) Pie chart shows the fraction of pose errors that are due to Opposite viewpoints (Opposite), confusion with Nearby viewpoints (Nearby), confusion with Other rotations (Other). It also reports the percentage of correct pose estimations (Correct). (b) Impact of Pose Errors. \\textcolor{blue}{Blue Bars} display the %s performance obtained when all estimations are considered. \\textcolor{green}{Green Bars} display the %s improvement by \\textbf{removing} all estimations of one type: \\textbf{OTH} removes confusion with other rotation viewpoints;  \\textbf{NEAR} removes confusion with nearby viewpoints; \\textbf{OPP} removes confusion with opposite viewpoints. \\textcolor{BrickRed}{Brick Red Bars} show the %s improvement by \\textbf{correcting} all estimations of one type: \\textbf{OTH}, \\textbf{NEAR} and \\textbf{OPP}.} \n', metric, metric, metric);
 pr('\\label{fig1}\n');
 pr('\\end{figure}\n');
 pr('\n');
@@ -276,13 +276,13 @@ pr('\n');
 pr('\\begin{figure}[h]\n');
 pr('\\centering\n');
 pr('\\includegraphics[width=0.85\\textwidth,trim = 15mm 65mm 25mm 65mm, clip]{../plot_7.pdf} \n');
-pr('\\caption{\\textbf{Success Rate considering 8 viewpoints.}  For each of the 8 viewpoints, we report: In \\textcolor{blue}{Blue}, the porcentage of the correct pose estimations. In \\textcolor{cyan}{Cyan}, the porcentage of confusion with the opposite viewpoints. In \\textcolor{yellow}{Yellow}, the porcentage of confusion with nearby viewpoints. In \\textcolor{BrickRed}{Brick Red}, the porcentage of the confusions with other rotations.}\n');
+pr('\\caption{\\textbf{Success Rate considering 8 viewpoints.}  For each of the 8 viewpoints, we report: In \\textcolor{blue}{Blue}, the percentage of the correct pose estimations. In \\textcolor{cyan}{Cyan}, the percentage of confusion with the opposite viewpoints. In \\textcolor{yellow}{Yellow}, the percentage of confusion with nearby viewpoints. In \\textcolor{BrickRed}{Brick Red}, the percentage of the confusions with other rotations.}\n');
 pr('\\label{fig2}\n');
 pr('\\end{figure}\n');
 pr('\n');
 
 pr('\\clearpage\n');
-pr('Figure \\ref{fig3} summarizes the main object characteristic influences. Figure \\ref{fig3a} shows the influence of the side visibility. Figures \\ref{fig3b} and \\ref{fig3c} report the aspect ratio and object sizes effects, respectively.\n');
+pr('Figure \\ref{fig3} summarizes the main object characteristic influences. Figure \\ref{fig3a} shows the influence of the side visibility. Figures \\ref{fig3b} and \\ref{fig3c} report the aspect ratio and object size effects, respectively.\n');
 pr('Figure \\ref{fig4} provides a summary of the sensitivity to each characteristic and the potential impact on improving pose estimation robustness. The worst-performing and best-performing combinations for each object characteristic are averaged over the selected object categories. The difference between the best and the worst performance indicates sensitivity; the difference between the best and the overall indicates the potential impact.\n');
 pr('\\begin{figure}[h]\n');
 pr('\\centering\n');
@@ -366,7 +366,7 @@ for obj=1:length(objects)
         
     end
 end
-pr('\\caption{\\textbf{Main Pose Estimation Errors for all selected Object Class from %s dataset.}}\n', dataset);
+pr('\\caption{\\textbf{Main Pose Estimation Errors for all selected Object Classes from %s dataset.}}\n', dataset);
 pr('\\label{fig6}\n');
 pr('\\end{figure}\n');
 
@@ -387,7 +387,7 @@ for obj=1:length(objects)
         
     end
 end
-pr('\\caption{\\textbf{Success Rate considering 8 viewpoints for all selected Object Class from %s dataset.}}\n', dataset);
+pr('\\caption{\\textbf{Success Rate considering 8 viewpoints for all selected Object Classes from %s dataset.}}\n', dataset);
 pr('\\label{fig7}\n');
 pr('\\end{figure}\n');
 

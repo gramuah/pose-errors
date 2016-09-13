@@ -632,20 +632,20 @@ if strcmp(detector(length(detector)-1:length(detector)), 'gt')
         switch error_type
             
             case 1
-                maxval(af+3) = getMaxVal([result(o).pose.(fnames{af})], 'aos');
-                minval(af+3) = getMinVal([result(o).pose.(fnames{af})], 'aos');
+                maxval(af+3) = getMaxVal([result.pose.(fnames{af})], 'aos');
+                minval(af+3) = getMinVal([result.pose.(fnames{af})], 'aos');
             case 2
-                maxval(af+3) = getMaxVal([result(o).pose.(fnames{af})], 'avp15');
-                minval(af+3) = getMinVal([result(o).pose.(fnames{af})], 'avp15');
+                maxval(af+3) = getMaxVal([result.pose.(fnames{af})], 'avp15');
+                minval(af+3) = getMinVal([result.pose.(fnames{af})], 'avp15');
             case 3
-                maxval(af+3) = getMaxVal([result(o).pose.(fnames{af})], 'peap15');
-                minval(af+3) = getMinVal([result(o).pose.(fnames{af})], 'peap15');
+                maxval(af+3) = getMaxVal([result.pose.(fnames{af})], 'peap15');
+                minval(af+3) = getMinVal([result.pose.(fnames{af})], 'peap15');
             case 4
-                maxval(af+3) = getMaxVal([result(o).pose.(fnames{af})], 'mean_error');
-                minval(af+3) = getMinVal([result(o).pose.(fnames{af})], 'mean_error');
+                maxval(af+3) = getMaxVal([result.pose.(fnames{af})], 'mean_error');
+                minval(af+3) = getMinVal([result.pose.(fnames{af})], 'mean_error');
             case 5
-                maxval(af+3) = getMaxVal([result(o).pose.(fnames{af})], 'median_error');
-                minval(af+3) = getMinVal([result(o).pose.(fnames{af})], 'median_error');
+                maxval(af+3) = getMaxVal([result.pose.(fnames{af})], 'median_error');
+                minval(af+3) = getMinVal([result.pose.(fnames{af})], 'median_error');
         end
         
         resultclass.maxval(af+3) = maxval(af+3);

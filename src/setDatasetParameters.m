@@ -15,7 +15,7 @@ switch dataset
     sourceDir = '../PASCAL3D+';
     dataset_params.imset = 'test';  % set used for analysis
     dataset_params.imdir = [sourceDir '/data/PASCAL3D+_release1.1/PASCAL/VOCdevkit/VOC2012/JPEGImages']; % needs to be set for your computer
-    dataset_params.VOCsourcepath = './src/VOCcode';  % change this for later VOC versions
+    dataset_params.VOCsourcepath = '/VOCcode';  % change this for later VOC versions
     dataset_params.VOCset = 'PASCAL3D';
     dataset_params.dataBaseDir = [sourceDir '/data/PASCAL3D+_release1.1'];
     addpath(dataset_params.VOCsourcepath);

@@ -12,7 +12,7 @@ SAVE_SUMMARY = 1; % set true to save a txt file with the main results
 
 % specify which pose estimators and detectors to evaluate
 full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
-detectors = {'bhf'}; % detectors to analyze
+detectors = {'rand-gt'}; % detectors to analyze
 
 dataset_params = setDatasetParameters(dataset);
 objnames_all = dataset_params.objnames_all;
@@ -116,14 +116,13 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             
         end
     end
-    
+    fprintf('\n\n');
     %% Create plots and .txt files for the analysis
     localization = tp_display_localization;
     
     for o = 1:numel(objnames_selected)
-        fprintf('\n\nObtaining result for the class: %s\n', objnames_selected{o});
+        fprintf('Obtaining result for the class: %s\n', objnames_selected{o});
         clear result;
-        fprintf('%s\n', objnames_selected{o})
         tmp = load(fullfile(resultdir, sprintf('%s/results_I_%s_%s.mat', objnames_selected{o}, ...
             objnames_selected{o}, localization)));
         result(1) = tmp.result;

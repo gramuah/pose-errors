@@ -6,8 +6,8 @@ function [detpath, resultdir, detname] = setDetectorInfo(detector)
   switch detector
     case 'rand-gt'
       detpath = '../detections/rand/RAND_PASCAL3D_%s_det.txt';
-      resultdir = '../results/rand';
-      detname = 'rand';
+      resultdir = '../results/rand-gt';
+      detname = 'rand-gt';
     case 'hfplev'
       detpath = '../detections/hfplev/HFPLEV_PASCAL3D_%s_det.txt';
       resultdir = '../results/hfplev';
