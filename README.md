@@ -26,11 +26,11 @@ If you make use of this software, please cite the following reference in any pub
 
 The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is required.
 
-## HOW TO GENERATE THE REPORTS:
+## HOW TO GENERATE THE REPORTS?:
 The tool we provide here generates the detailed reports described in our paper, for any method using the PASCAL 3D+ dataset.
 
 
-   + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators. Note these are the methods analysed in the paper.
+   + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators? Note these are the methods analysed in the paper.
 
        1) Download the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
 
@@ -40,9 +40,9 @@ The tool we provide here generates the detailed reports described in our paper, 
    
        4) Open Matlab and run the script poseEstimationAnalysisScript.m.
 
-   + **CASE II:** PASCAL 3D+ dataset and your own pose estimators
+   + **CASE II:** How to generate the reports for your own method using the PASCAL 3D+ dataset?
 
-       1) Create a subdirectory with the detector name within detections. 
+       1) Create a subdirectory in the detections folder. Assign this directory the name of your pose estimator.
          
        2) Create a text file of detector for each object category.
        
