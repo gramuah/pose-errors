@@ -1,8 +1,9 @@
-# Pose Estimation Diagnostic Tools
+# Pose Estimation Diagnostic Tool
 
 ## INTRODUCTION:
 
 This project contains the source code and annotations for analyzing object detectors and pose estimators on the PASCAL 3D+ dataset.
+
 
 This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper.
 
@@ -16,7 +17,7 @@ If you make use of this software, please cite the following reference in any pub
 
         @inproceedings{Redondo-Cabrera2016,
                Title  = {Pose Estimation Errors, the Ultimate Diagnosis},
-               Author = {Redondo-Cabrera, C. Lopez-Sastre, R.~J., Xiang, Y., Tuytelaars, T. and Savarese, S.},
+               Author = {Redondo-Cabrera, C. and Lopez-Sastre, R.~J. and Xiang, Y. and Tuytelaars, T. and Savarese, S.},
                Booktitle = {ECCV},
                Year = {2016}
         }
