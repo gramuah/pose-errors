@@ -4,8 +4,8 @@
 
 This project contains the source code and annotations for analyzing object detectors and pose estimators on the PASCAL 3D+ dataset.
 
+This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper. 
 
-This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper.
 
 ####LICENCE
 
@@ -26,17 +26,19 @@ If you make use of this software, please cite the following reference in any pub
 
 The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is required.
 
-## HOW TO RUN:
+## HOW TO GENERATE THE REPORTS:
+The tool we provide here generates the detailed reports described in our paper, for any method using the PASCAL 3D+ dataset.
 
-   + **CASE I:** PASCAL 3D+ dataset and VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators.
 
-       1) Download [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html)
+   + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators. Note these are the methods analysed in the paper.
 
-       2) In poseEstimationAnalysisScript.m, set all flags on top to 1 (true)   
+       1) Download the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
+
+       2) In the script poseEstimationAnalysisScript.m, set all flags to 1 (true).   
    
-       3) In setDatasetParameters.m, set the imdir path to a valid directory of PASCAL 3D+ images
+       3) In setDatasetParameters.m, set the imdir path to a valid directory with the PASCAL 3D+ images.
    
-       4) Run poseEstimationAnalysisScript.m in Matlab
+       4) Open Matlab and run the script poseEstimationAnalysisScript.m.
 
    + **CASE II:** PASCAL 3D+ dataset and your own pose estimators
 
