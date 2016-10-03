@@ -2,12 +2,12 @@
 
 ## INTRODUCTION:
 
-This project contains the source code and annotations for analyzing object detectors and pose estimators on the PASCAL 3D+ dataset.
+This project contains the source code and annotations for analyzing object detectors and pose estimators on the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
 
 This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper. 
 
 
-####LICENCE
+####LICENSE
 
 The license information of this project is described in the file "LICENSE".
 
@@ -30,12 +30,12 @@ The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is requir
 The tool we provide here generates the detailed reports described in our paper, for any method using the PASCAL 3D+ dataset.
 
 
-   + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators? Note these are the methods analysed in the paper.
+   + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators? Note these are the methods analyzed in the paper.
 
        1) Download the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
 
-       2) In the script poseEstimationAnalysisScript.m, set all flags to 1 (true).   
-   
+       2) In the script poseEstimationAnalysisScript.m, set all flags to 1 (true).
+          
        3) In setDatasetParameters.m, set the imdir path to a valid directory with the PASCAL 3D+ images.
    
        4) Open Matlab and run the script poseEstimationAnalysisScript.m.
@@ -44,22 +44,18 @@ The tool we provide here generates the detailed reports described in our paper, 
 
        1) Create a subdirectory in the detections folder. Assign this directory the name of your pose estimator.
          
-       2) Create a text file of detector for each object category.
-       
-		These file contain for each row the detections and estimations obtained by the
-        detector. The format for each detection is: 
+       2) In this directory create a text file for each object category. These files must contain in each row the detections and pose estimations obtained by the model, following this format:
 
-                 image_name (without extension, \ie '.jpg') score x1 y1 x2 y2 azimuth zenith
-                 example: 2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43 
+                 image_name (without extension, \ie '.jpg') detector_score x1 y1 x2 y2 azimuth zenith
+                 example: 2008_000002 0.292526 34.00 11.00 448.00 293.00 342.86 171.43                 
    
-       3) Add a corresponding entry to setDetectorInfo.m and update detector variable in 
-       poseEstimationAnalysisScript.m
+       3) Add a corresponding entry to the script setDetectorInfo.m and update the ''detectors'' variable in poseEstimationAnalysisScript.m to analyze the created model.       
 
-       4) Perform [2-4] steps of CASE I
+       4) Perform [2-4] steps of CASE I.
 	
-   + **CASE III:** Include a new dataset and your own pose estimators
+   + **CASE III:** Include a new dataset and your own pose estimators.
 
-       1) Add the new dataset in the annotations folder
+       1) Add the new dataset to the annotations folder.
 
        2) Include the new dataset parameters in setDatasetParameters.m
 

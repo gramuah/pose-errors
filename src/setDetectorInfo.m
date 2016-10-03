@@ -40,7 +40,7 @@ function [detpath, resultdir, detname] = setDetectorInfo(detector)
       detpath = '../detections/vpskps/VPSKPS_PASCAL3D_%s_det.txt';
       resultdir = '../results/vpskps';
       detname = 'vpskps';
-        case 'vpskps-gt'
+    case 'vpskps-gt'
       detpath = '../detections/vpskps-gt/vpskps_PASCAL3D_%s_det.txt';
       resultdir = '../results/vpskps-gt';
       detname = 'vpskps-gt';
