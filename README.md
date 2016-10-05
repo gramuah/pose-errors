@@ -36,7 +36,7 @@ The tool we provide here generates the detailed reports described in our paper, 
 
        2) In the script src/poseEstimationAnalysisScript.m, set all flags to 1 (true).                
    
-       3) Open Matlab and run the script poseEstimationAnalysisScript.m.
+       3) Open Matlab, go to src folder and run the script poseEstimationAnalysisScript.m.
 
    + **CASE II:** How to generate the reports for your own method using the PASCAL 3D+ dataset?
 
