@@ -3,9 +3,9 @@
 % type of dataset
 dataset = 'PASCAL3D+';
 
-SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
-SAVE_QUALITATIVE = 0; % set true to save qualitative results
-SHOW_FIGURES = 0;     % set true to show plots
+SKIP_SAVED_FILES = 1; % set true to not overwrite any analysis results
+SAVE_QUALITATIVE = 1; % set true to save qualitative results
+SHOW_FIGURES = 1;     % set true to show plots
 DO_TEX = 1; % set true to realize and save info report
 DO_OVERLAP_CRITERIA_ANALYSIS = 1; % set true to do overlap analysis
 SAVE_SUMMARY = 1; % set true to save a txt file with the main results 

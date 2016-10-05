@@ -32,13 +32,11 @@ The tool we provide here generates the detailed reports described in our paper, 
 
    + **CASE I:** How to generate the reports for the methods VDPM (vdpm), V&K (vpskps), DPM+VOC-VP (3ddpm) or BHF (bhf) pose estimators? Note these are the methods analyzed in the paper.
 
-       1) Download the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
+       1) Download the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html) (Release 1.1) and uncompress the zip file provided in the folder PASCAL3D+.
 
-       2) In the script poseEstimationAnalysisScript.m, set all flags to 1 (true).
-          
-       3) In setDatasetParameters.m, set the imdir path to a valid directory with the PASCAL 3D+ images.
+       2) In the script src/poseEstimationAnalysisScript.m, set all flags to 1 (true).                
    
-       4) Open Matlab and run the script poseEstimationAnalysisScript.m.
+       3) Open Matlab and run the script poseEstimationAnalysisScript.m.
 
    + **CASE II:** How to generate the reports for your own method using the PASCAL 3D+ dataset?
 
