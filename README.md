@@ -54,35 +54,3 @@ The tool we provide here generates the detailed reports described in our paper, 
        3) Add a corresponding entry to the script src/setDetectorInfo.m and update the ''detectors'' variable in src/poseEstimationAnalysisScript.m to analyze the created model.       
 
        4) Perform steps [2-4]  of CASE I.
-
-
-
-## DESCRIPTION OF FOLDERS:
-
-   + annotations: 
-
-         Contains annotations for objects (excluding "difficult" objects, as defined
-         by VOC and PASCAL 3D+ annotations). The file Labels.txt contains the name of the 
-         parts defined on PASCAL 3D+, visible parts and other object characteristics, 
-         such as object sizes and aspect ratios.  
-
-   
-   + src: 
-         
-         Contains code for reading the annotations and storing them in the PASCAL VOC
-         record structure and realizes the pose estimation analysis  
-
-   
-   + results: 
-
-         For each detector: a folder for each object class, which contains the graphical and 
-         analytical results, is created. Finally, a reports with all results can be obtained by
-         running the AnalysisAutoReportTemplate.tex file automatically created in tex folder. 
-
-   
-   + detections: 
-
-         For each detector it is necessary to create a subdirectory which contains, 
-         for each object class, a list of all detections and pose estimations. 
-         The file det_format.txt helps to explain the detection format.
-
