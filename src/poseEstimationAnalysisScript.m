@@ -4,12 +4,12 @@
 dataset = 'PASCAL3D+';
 
 % FLAGS
-SKIP_SAVED_FILES = 1; % set true to not overwrite any analysis results
-SAVE_QUALITATIVE = 1; % set true to save qualitative results
-SHOW_FIGURES = 1;     % set true to show plots
-DO_TEX = 1; % set true to realize and save diagnosis report using LaTex
-DO_OVERLAP_CRITERIA_ANALYSIS = 1; % set true to do overlap analysis
-SAVE_SUMMARY = 1; % set true to save a txt file with the main results 
+SKIP_SAVED_FILES = 0; % set true to not overwrite any analysis results
+SAVE_QUALITATIVE = 0; % set true to save qualitative results
+SHOW_FIGURES = 0;     % set true to show plots
+DO_TEX = 0; % set true to realize and save diagnosis report using LaTex
+DO_OVERLAP_CRITERIA_ANALYSIS = 0; % set true to do overlap analysis
+SAVE_SUMMARY = 0; % set true to save a txt file with the main results 
 
 % specify which pose estimators and detectors to evaluate
 full_set = {'rand-gt', 'bhf', 'bhf-gt', 'vdpm','vdpm-gt', 'vpskps', 'vpskps-gt', '3ddpm'};
@@ -356,7 +356,7 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             writeTexObject(objnames_selected{o}, fullfile(resultdir, 'tex'), ...
                 ann.gt(ind), metric_type, dataset, detector);
         end
-        %Generate PDF report with pdflatex
+        %Generate PDF report with pdflatex        
         current_path = pwd;
         cd(fullfile(resultdir, 'tex'));
         command = ['pdflatex AnalysisAutoReportTemplate.tex'];
