@@ -44,7 +44,7 @@ The tool we provide here generates the detailed reports described in our paper, 
 
    + **CASE II:** How to generate the reports for your own method using the PASCAL 3D+ dataset?
 
-       1) Create a subdirectory in the detections folder. Assign this directory the name of your new model.
+       1) Create a subdirectory in the ''detections'' folder. Assign this directory the name of your new model.
          
        2) In this directory create a text file for each object category. These files must contain in each row the detections and pose estimations obtained by the model, following this format:
 
@@ -54,16 +54,7 @@ The tool we provide here generates the detailed reports described in our paper, 
        3) Add a corresponding entry to the script src/setDetectorInfo.m and update the ''detectors'' variable in src/poseEstimationAnalysisScript.m to analyze the created model.       
 
        4) Perform steps [2-4]  of CASE I.
-	
-   + **CASE III:** Include a new dataset and your own pose estimators.
 
-       1) Add the new dataset to the annotations folder.
-
-       2) Include the new dataset parameters in setDatasetParameters.m
-
-       3) Modify readDatasetAnnotations.m for maximum compatibility to PASCAL 3D+ dataset (see Code_explanation.txt) 
-
-       4) Perform all steps of CASE II
 
 
 ## DESCRIPTION OF FOLDERS:
