@@ -1,7 +1,7 @@
 function [detpath, resultdir, detname] = setDetectorInfo(detector)
 % [detpath, resultdir, detname] = setDetectorInfo(detector)
 %
-% sets path etc for given detector
+% sets path etc for a given detector
 
   switch detector
     case 'rand-gt'

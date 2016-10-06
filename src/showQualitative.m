@@ -1,9 +1,6 @@
 function showQualitative(imdir, rec, result)
-% showSurprisingMisses(imdir, rec, gt)
+% showQualitative(imdir, rec, gt)
 % 
-% Sorts objects by their normalized precision, minus the average of the
-% average normalized precision for their characteristics.  For example, a
-% medium-sized side-view of an airplane is likely to have a high APn.  
 %
 % Input:
 %   imdir: the directory of images

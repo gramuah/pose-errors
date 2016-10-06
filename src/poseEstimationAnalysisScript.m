@@ -3,10 +3,11 @@
 % type of dataset
 dataset = 'PASCAL3D+';
 
+% FLAGS
 SKIP_SAVED_FILES = 1; % set true to not overwrite any analysis results
 SAVE_QUALITATIVE = 1; % set true to save qualitative results
 SHOW_FIGURES = 1;     % set true to show plots
-DO_TEX = 1; % set true to realize and save info report
+DO_TEX = 1; % set true to realize and save diagnosis report using LaTex
 DO_OVERLAP_CRITERIA_ANALYSIS = 1; % set true to do overlap analysis
 SAVE_SUMMARY = 1; % set true to save a txt file with the main results 
 
@@ -355,6 +356,12 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
             writeTexObject(objnames_selected{o}, fullfile(resultdir, 'tex'), ...
                 ann.gt(ind), metric_type, dataset, detector);
         end
+        %Generate PDF report with pdflatex
+        current_path = pwd;
+        cd(fullfile(resultdir, 'tex'));
+        command = ['pdflatex AnalysisAutoReportTemplate.tex'];
+        system(command);
+        cd(current_path);
     end
     clear resulttotal;
     clear result;
@@ -362,4 +369,3 @@ for d = 1:numel(detectors)  % loops through each detector and performs analysis
     close all;
 end %End for(detectors)
 clear all;
-%exit;
