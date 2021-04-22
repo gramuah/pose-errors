@@ -7,11 +7,11 @@ This project contains the source code and annotations for analyzing object detec
 This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper](https://gram.web.uah.es/data/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper. 
 
 
-####LICENSE
+#### LICENSE
 
 The license information of this project is described in the file "LICENSE".
 
-####CITING
+#### CITING
 
 If you make use of this software, please cite the following reference in any publications:  
 
@@ -22,7 +22,7 @@ If you make use of this software, please cite the following reference in any pub
                Year = {2016}
         }
 
-####REQUIREMENTS
+#### REQUIREMENTS
 
 The diagnostic tool is developed and tested under Ubuntu 14.04. Matlab is required.
 To generate the PDF with the report, we use the tool **pdflatex**, which has to be correctly installed.
