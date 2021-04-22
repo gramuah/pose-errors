@@ -4,7 +4,7 @@
 
 This project contains the source code and annotations for analyzing object detectors and pose estimators on the [PASCAL 3D+ dataset](http://cvgl.stanford.edu/projects/pascal3d.html).
 
-This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper] (http://agamenon.tsc.uah.es/Investigacion/gram/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper. 
+This is a repository with an implementation of the diagnostic tool described in our [ECCV2016 paper](https://gram.web.uah.es/data/publications/eccv2016-redondo.pdf). We provide here the codes and data needed to reproduce all the experiments detailed in the paper. 
 
 
 ####LICENSE
